@@ -10,7 +10,6 @@ const WEBPACK_MANIFEST = './assets/webpack-manifest.json';
 const BUILD_ASSETS_DIRECTORY = './assets/';
 const BUILD_ASSETS_FILES = ['./assets/**/*.*'];
 const HTML_FILES = ['./src/**/*.html', '!./src/lib/**/*'];
-const JS_HINT_FILES = ['./src/**/*.js', '!./src/lib/**/*.js', '!./src/widgets/**/*.js'];
 
 // 错误处理函数
 function errorHandler(src, e) {
@@ -157,29 +156,16 @@ gulp.task('release-html', function() {
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>> production end <<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
-// 检查javascript语法规范
-gulp.task('lint', function() {
-    var jshint = require('gulp-jshint');
-    var jshintStylish = require('jshint-stylish');
-
-    return gulp.src(JS_HINT_FILES)
-        .pipe(jshint())
-        .pipe(jshint.reporter(jshintStylish, {
-            verbose: false,
-            beep: false
-        }))
-        .pipe(jshint.reporter('fail'));
-});
-
 // 启动开发环境，包含自动重编译，开发服务器和自动重载
 // This will run in this order:
 // * clean
 // ...
-// * release-html and xx in parallel 写法['', '']
+// * xxx and xxx in parallel 写法['', '']
 // * webserver
 // * Finally call the callback function
 gulp.task('dev', function(callback) {
-    runSequence('clean', ['webpack-build-dev'],
+    runSequence('clean',
+        'webpack-build-dev',
         'webpack-watch',
         'webserver',
         callback);
@@ -187,7 +173,8 @@ gulp.task('dev', function(callback) {
 
 gulp.task('production', function(callback) {
     runSequence('clean',
-        'webpack-build-production', ['release-html'],
+        'webpack-build-production',
+        'release-html',
         callback);
 });
 

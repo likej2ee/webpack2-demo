@@ -1,6 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
-var extractTextPlugin = require('extract-text-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const INCLUDE_PATHS = path.resolve(__dirname, "./src/core");
 
@@ -59,7 +59,7 @@ module.exports = {
         }, {
             test: /\.scss$/,
             include: /^(?=.*views)(?!.*_base)|(?=.*ucenter)(?!.*_base)/,
-            loader: extractTextPlugin.extract({
+            loader: ExtractTextPlugin.extract({
                 loader: [
                     'css-loader',
                     'postcss-loader',
