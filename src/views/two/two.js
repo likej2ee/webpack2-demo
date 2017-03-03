@@ -6,7 +6,7 @@ console.log(TEST_NAME);
 
 // 2. 解构赋值
 // http://www.tuicool.com/articles/y2qYraR
-var [one,  two] = [1, 2];
+var [one, two] = [1, 2];
 console.log(one + two);
 
 // 3. for of
@@ -32,7 +32,7 @@ uniqueWords.add(1);
 
 console.log(uniqueWords);
 for (var word of uniqueWords) {
-   console.log(word);
+    console.log(word);
 }
 console.log(' forof循环结束后 word = ' + word);
 
@@ -44,6 +44,6 @@ myMap.set('b', 3);
 
 console.log(myMap);
 for (let [key, value] of myMap) {
-   console.log('key = ' + key + ', value = ' + value);
+    console.log('key = ' + key + ', value = ' + value);
 }
 console.log(' forof循环结束后 key = ' + typeof key);

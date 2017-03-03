@@ -7,23 +7,15 @@ const INCLUDE_PATHS = path.resolve(__dirname, "./src/core");
 module.exports = {
     module: {
         rules: [{
-            test: /\.js$/, // include .js files
             enforce: 'pre',
+            test: /\.js$/, // include .js files
             include: /^(?=.*views)|(?=.*ucenter)|(?=.*core)/,
             use: {
-                loader: 'jshint-loader',
+                loader: 'eslint-loader',
                 options: {
-                    // jshint errors are displayed by default as warnings
-                    // set emitErrors to true to display them as errors
-                    emitErrors: false,
-
-                    // jshint to not interrupt the compilation
-                    // if you want any file with jshint errors to fail
-                    // set failOnHint to true
-                    failOnHint: false,
-
-                    // custom reporter function
-                    // reporter: function (errors) {}
+                    emitWarning: false, // (default: false) Loader will always return warnings if option is set to true.
+                    failOnWarning: false, // (default: false) Loader will cause the module build to fail if there are any eslint warnings.
+                    failOnError: false // (default: false) Loader will cause the module build to fail if there are any eslint errors.
                 }
             }
         }, {

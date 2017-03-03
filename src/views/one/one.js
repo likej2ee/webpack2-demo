@@ -1,7 +1,7 @@
 import './one.scss';
 
 // 1.
-var str = "aaaabbbccccddfgh";
+var str = 'aaaabbbccccddfgh';
 var obj = {};
 for (var i = 0; i < str.length; i++) {
     var v = str.charAt(i);

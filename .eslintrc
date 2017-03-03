@@ -1,0 +1,49 @@
+{
+    "_comment": "See http://eslint.cn/docs/rules/ for more details",
+    "env": {
+        "browser": true,
+    },
+    "globals": {
+        "__DEV_ECLIPSE__": true,
+        "__DEV__": true,
+        "__PRODUCTION__": true,
+        "__dirname": true,
+
+        "jquery": true,
+        "$": true,
+        "avalon": true,
+        "Vue": true,
+
+        "AGL": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "rules": {
+        // Possible Errors
+        "no-cond-assign": [2, "always"],
+        "no-console": 0,
+
+        // Stylistic Issues
+        "camelcase": 2,
+        "comma-dangle": [2, "never"],
+        "curly": 2,
+        "brace-style": [2, "1tbs"],
+        "indent": [2, 4],
+        "keyword-spacing": [2, {
+            "before": true,
+            "after": true
+        }],
+        "linebreak-style": [2, "unix"],
+        "quotes": [2, "single"],
+        "semi": [2, "always"],
+        "space-infix-ops": [2, {
+            "int32Hint": false
+        }],
+        "object-curly-newline": [2, {
+            "minProperties": 1
+        }],
+        "object-property-newline": 2,
+    }
+}
