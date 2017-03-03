@@ -1,0 +1,159 @@
+@charset "utf-8";
+
+////
+/// 变量配置
+/// 用于颜色，文本，尺寸等内容的配置。
+///
+/// @group API
+/// @author xjq
+////
+
+// 颜色表
+// -----------------------------------------------------------------------------
+
+/// 黑色
+$black:                           #000                               !default;
+/// 深灰色
+$grey-darker:                     #1d1d1d                            !default;
+/// 暗灰色
+$grey-dark:                       #333                               !default;
+/// 灰色
+$grey:                            #555                               !default;
+/// 淡灰色
+$grey-light:                      #dedede                            !default;
+/// 浅灰色
+$grey-lighter:                    #f5f5f5                           !default;
+/// 白色
+$white:                           #fff                               !default;
+
+/// 红色
+$red:                             #c51e3a                            !default;
+/// 浅红色
+$red-light:                       #ffecec                            !default;
+/// 红色
+$pink:                            #d85c5c                            !default;
+/// 浅红色
+$pink-light:                      #d85c5c                            !default;
+/// 黄色调
+$yellow:                          #fe7e01                            !default;
+/// 浅黄色
+$yellow-light:                    #fefaef                            !default;
+/// 蓝色调
+$blue:                            #387ef5                            !default;
+/// 浅蓝色
+$blue-light:                      #11c1f3                            !default;
+/// 绿色调
+$green:                           #33cd5f                            !default;
+/// 浅绿色
+$green-light:                     #dff0d8                            !default;
+/// 紫色
+$purple:                          #886aea                            !default;
+/// 浅紫色
+$purple-light:                    #BB9DEC                            !default;
+
+// 项目配色
+// -----------------------------------------------------------------------------
+
+/// 主风格色
+$primary-color:                   $red                               !default;
+
+/// 主风格背景色
+$primary-bg-color:                #fff                          !default;
+
+/// 线条颜色，一般作为分割线，文本框，模块等控件的无状态时的边框颜色
+$line-color:                      $grey-lighter                      !default;
+
+//  文字
+// -----------------------------------------------------------------------------
+
+/// 默认字体集
+$font-family-base:              Microsoft Yahei, SimSun, Verdana,Arial !default;
+
+/// 强调文字字体集
+$font-family-loud:              Microsoft Yahei, SimSun, Verdana, Arial !default;
+
+/// 默认文字大小
+$font-size-base:                14px                                 !default;
+/// 较大文字大小
+$font-size-large:               18px                                 !default;
+/// 较小文字大小
+$font-size-small:               12px                                 !default;
+
+/// 默认文字行高
+$line-height-base:              1.5                                  !default;
+/// 较大文字行高
+$line-height-large:             1.6                                  !default;
+/// 较小文字行高
+$line-height-small:             1.3                                  !default;
+
+// 文本颜色
+// -----------------------------------------------------------------------------
+
+/// 默认文字颜色
+$font-color-base:               $black                               !default;
+/// 强调文本颜色
+$font-color-loud:               $grey-darker                         !default;
+/// 次要文本颜色
+$font-color-quiet:              $grey-light                          !default;
+
+/// 链接颜色
+$link-color:                    $font-color-base                     !default;
+/// 链接获取到焦点时的文字颜色
+$link-focus-color:              $link-color                          !default;
+/// 已访问的链接的文字颜色
+$link-visited-color:            $link-color                          !default;
+
+// 状态颜色
+// -----------------------------------------------------------------------------
+$primary-color:                 $blue                                !default;
+$success-color:                 $green                               !default;
+$info-color:                    $blue                                !default;
+$warning-color:                 $yellow                              !default;
+$danger-color:                  $red                                 !default;
+
+/// 成功状态
+$success-color:                 $green                               !default;
+$success-text:                  $success-color                       !default;
+$success-bg:                    $green-light                         !default;
+$success-border:                $success-color                       !default;
+
+/// 消息状态
+$info-color:                    $blue                                !default;
+$info-text:                     $info-color                          !default;
+$info-bg:                       $blue-light                          !default;
+$info-border:                   $info-color                          !default;
+
+/// 警告状态
+$warning-color:                 $yellow                              !default;
+$warning-text:                  $warning-color                       !default;
+$warning-bg:                    $yellow-light                        !default;
+$warning-border:                $warning-color                       !default;
+
+/// 错误状态
+$danger-color:                  $red                                 !default;
+$danger-text:                   $danger-color                        !default;
+$danger-bg:                     $red-light                           !default;
+$danger-border:                 $danger-color                        !default;
+
+// 商品相关颜色
+// -----------------------------------------------------------------------------
+$product-sales-price-color:     $red 		                         !default;
+$product-market-price-color:    $grey-light                          !default;
+
+// 布局定义
+// -----------------------------------------------------------------------------
+
+/// 间距，空隙
+$content-margin:               10px                                 !default;
+
+// 自定义图标
+// -----------------------------------------------------------------------------
+
+$icomoon-font-path: "fonts" !default;
+
+$ico-spinner1: "\e97b";
+$ico-spinner2: "\e982";
+$ico-arrow-dropdown: "\f35f";
+$ico-arrow-dropleft: "\f361";
+$ico-arrow-dropright: "\f363";
+$ico-arrow-dropup: "\f365";

@@ -1,0 +1,276 @@
+@charset 'utf-8';
+
+////
+/// 混入类
+/// 混入类用于输出一段通用的 CSS 片段。
+/// 通过混入类，可以只编写很少的代码，就能方便且快速的生成一大段 CSS，并且可以通过参数进行定制。
+///
+/// @group API
+/// @author undefined
+////
+
+/// 清除元素内浮动
+/// @example scss - 使用
+///     .box {
+///         @include clearfix;
+///     }
+///
+/// @example css - 输出
+///     .box:before, .box:after {
+///         content: " ";
+///         display: table;
+///     }
+///
+///     .box:after {
+///       clear: both;
+///     }
+@mixin clearfix() {
+    &:before,
+    &:after {
+        display: table;
+
+        content: ' ';
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+/// 单行文字超出部分使用...
+/// @example scss - 使用
+///     .title {
+///         @include  text-ellipsis;
+///     }
+///
+/// @example css - 输出
+///     .title {
+///         overflow: hidden;
+///         text-overflow: ellipsis;
+///         white-space: nowrap;
+///     }
+@mixin text-ellipsis() {
+    overflow: hidden;
+
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/// 透明度
+/// @param {Length}[0] $opacity - 透明度
+/// @example scss - 使用
+///     .button-disabled {
+///         @include opacity(0.4);
+///     }
+///
+/// @example css - 输出
+///     .button-disabled {
+///         opacity: 0.4;
+///         filter: alpha(opacity=$opacity * 10);
+///     }
+@mixin opacity($opacity: 0) {
+    opacity: $opacity;
+
+    filter: alpha(opacity=$opacity * 100);
+}
+
+/// 设置元素的宽度及高度
+///
+/// @param {Length} $width - 宽度
+/// @param {Length} $height [$width] - 高度
+///
+/// @output
+/// - 只传入一个值时，则该值即为宽度也为高度；
+/// - 传入两个值时，则第一个为宽度，第二个为高度；
+/// - 如果某一个值为 null，则不会输出其对应的属性。
+///
+/// @example scss - 使用
+///     .box {
+///         @include size(10px);
+///     }
+///     .box {
+///         @include size(10px, 20px);
+///     }
+///     .box {
+///         @include size(null, 20px);
+///     }
+///
+/// @example css - 输出
+///     .box {
+///         width: 10px;
+///         height: 10px;
+///     }
+///     .box {
+///         width: 10px;
+///         height: 20px;
+///     }
+///     .box {
+///         height: 20px;
+///     }
+@mixin size($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+
+/// 设置元素盒模型
+///
+/// @param {Length}[null] $width - 宽度
+/// @param {Length}[null] $height - 高度
+/// @param {Length}[null] $padding-vertical - 垂直内边距
+/// @param {Length}[null] $padding-horizontal - 水平内边距
+/// @param {Length}[null] $font-size - 文字大小
+/// @param {Length}[null] $line-height - 文字行高
+/// @param {Length}[null] $border-width - 边框宽度
+/// @param {Length}[null] $border-radius - 圆角
+@mixin element-box(
+        $width: null,
+        $height: null,
+        $padding-vertical: null,
+        $padding-horizontal: null,
+        $border-width: null,
+        $border-radius: null,
+        $font-size: null,
+        $line-height: null ) {
+    @if $width {
+        width: $width;
+    }
+    @if $height {
+        height: $height;
+    }
+    @if $padding-vertical and $padding-horizontal {
+        padding: $padding-vertical $padding-horizontal;
+    }
+    @else if $padding-vertical {
+        padding:  {
+            top: $padding-vertical;
+            bottom: $padding-vertical;
+        }
+    }
+    @else if $padding-horizontal {
+        padding:  {
+            right: $padding-horizontal;
+            left: $padding-horizontal;
+        }
+    }
+    @if $font-size {
+        font-size: $font-size;
+    }
+    @if $line-height {
+        line-height: $line-height;
+    }
+    @if $border-width {
+        border-width: $border-width;
+    }
+    @if $border-radius {
+        border-radius: $border-radius;
+    }
+}
+
+/// 价格渲染
+/// @example scss - 使用
+///     .price {
+///         @include price(24px, 14px);
+///     }
+///
+/// @example css - 输出
+///     .price {
+///         .price .integer, .price .point, .price .symbol, .price .decimal {
+///             color: #f0431b;
+///         }
+///         .price .integer, .price .point {
+///             font-size: 24px;
+///         }
+///         .price .symbol, .price .decimal {
+///             font-size: 14px;
+///         }
+///     }
+@mixin price($integerSize: $font-size-large,
+$decimalSize: $font-size-small,
+$color: $product-sales-price-color) {
+    .integer,
+    .point,
+    .symbol,
+    .decimal {
+        color: $color;
+    }
+    .integer,
+    .point {
+        font-size: $integerSize;
+    }
+    .symbol,
+    .decimal {
+        font-size: $decimalSize;
+    }
+    .unit {
+        padding-left: 3px;
+
+        color: $font-color-quiet;
+    }
+}
+
+/// 按钮基本风格
+/// @param {Object} object - 变量名
+/// @output
+/// - ...
+/// @example scss - 使用
+///     ...
+/// @example css - 输出
+///     ...
+@mixin button-style($bg-color, $border-color, $color, $active-bg-color: $bg-color, $active-border-color: $bg-color) {
+    color: $color;
+    border-color: $border-color;
+    background-color: $bg-color;
+
+    // Give desktop users something to play with
+    &:hover {
+        text-decoration: none;
+
+        color: $color;
+    }
+    // &.active,
+    // &.activated {
+    //     border-color: $active-border-color;
+    //     background-color: $active-bg-color;
+    //     box-shadow: inset 0 1px 4px rgba(0,0,0,.1);
+    // }
+}
+
+/// 按钮无边框风格
+/// @param {Object} object - 变量名
+/// @output
+/// - ...
+/// @example scss - 使用
+///     ...
+/// @example css - 输出
+///     ...
+@mixin button-clear($color) {
+    &.button-clear {
+        color: $color;
+        border-color: transparent;
+        background: none;
+        // box-shadow: none;
+    }
+}
+
+/// 按钮有边框风格
+/// @param {Object} object - 变量名
+/// @output
+/// - ...
+/// @example scss - 使用
+///     ...
+/// @example css - 输出
+///     ...
+@mixin button-outline($bg-color, $border-color, $color, $active-bg-color: $bg-color, $active-border-color: $bg-color) {
+    &.button-outline {
+        color: $color;
+        border-color: $border-color;
+        background: $bg-color;
+        // box-shadow: none;
+
+        // &.active,
+        // &.activated {
+        //     color: #fff;
+        //     background-color: $color;
+        //     box-shadow: none;
+        // }
+    }
+}

@@ -1,0 +1,25 @@
+.panel {
+    width: 300px;
+    margin: 10px;
+    padding: 10px;
+
+    border: 10px solid red;
+    background-color: pink;
+
+    &.standard {
+        box-sizing: content-box; // 默认是content-box
+    }
+    &.monstrous {
+        box-sizing: border-box;
+        margin-left: 30px;
+    }
+    .panel-title {
+        font-size: 22px;
+        font-weight: 600;
+
+        background-color: yellow;
+    }
+    .panel-body {
+        background-color: yellow;
+    }
+}

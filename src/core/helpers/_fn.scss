@@ -1,0 +1,25 @@
+////
+/// 函数
+/// 函数用于执行一些数据运算及操作，比如尺寸计算，颜色亮度判断，集合内容的设置与读取等。
+///
+/// @group API
+/// @author undefined
+////
+
+/// Slightly lighten a color
+/// @access public
+/// @param {Color} $color - color to tint
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function tint($color, $percentage) {
+    @return mix($color, white, $percentage);
+}
+
+/// Slightly darken a color
+/// @access public
+/// @param {Color} $color - color to shade
+/// @param {Number} $percentage - percentage of `$color` in returned color
+/// @return {Color}
+@function shade($color, $percentage) {
+    @return mix($color, black, $percentage);
+}
