@@ -40,7 +40,7 @@ gulp.task('webserver', function() {
                     (/\.html$/.test(fileName) || /\/assets\//.test(fileName) || /\\assets\\/.test(fileName)));
             }
         },
-        defaultFile: './src/views/index/index.html',
+        defaultFile: './src/views/demo/demo.html',
         // directoryListing: true,
         open: true,
         port: 8888

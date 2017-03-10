@@ -84,6 +84,7 @@ module.exports = {
     entry: {
         'core': './src/core/core.js',
         'base': './src/views/_base/base.js',
+        'demo/demo': './src/views/demo/demo.js',
         'index/index': './src/views/index/index.js',
         'one/one': './src/views/one/one.js',
         'two/two': './src/views/two/two.js'
