@@ -1,3 +1,1 @@
-{
-    console.log('demo');
-}
+import './demo.scss';

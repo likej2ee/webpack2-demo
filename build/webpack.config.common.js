@@ -1,7 +1,11 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var config = require('../config');
 
+const ASSETS_ROOT = config.constants.assetsRoot;
+const PUBLIC_PATH = '/' + ASSETS_ROOT + '/';
+const LIB_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.libManifest;
 const INCLUDE_PATHS = path.resolve(__dirname, "./src/core");
 
 module.exports = {
@@ -67,10 +71,10 @@ module.exports = {
             })
         }]
     },
-    resolve: {
+    resolve: { // 解决路径问题，可简化 alias entry 的路径配置
         modules: [
             // 'node_modules',
-            path.resolve(__dirname, 'src')
+            path.join(__dirname, '../src')
         ],
         extensions: ['.js'],
         alias: {
@@ -82,22 +86,22 @@ module.exports = {
         }
     },
     entry: {
-        'core': './src/core/core.js',
-        'base': './src/views/_base/base.js',
-        'demo/demo': './src/views/demo/demo.js',
-        'index/index': './src/views/index/index.js',
-        'one/one': './src/views/one/one.js',
-        'two/two': './src/views/two/two.js'
+        'core': 'core/core.js',
+        'base': 'views/_base/base.js',
+        'demo/demo': 'views/demo/demo.js',
+        'index/index': 'views/index/index.js',
+        'one/one': 'views/one/one.js',
+        'two/two': 'views/two/two.js'
     },
     output: {
-        path: path.join(__dirname, 'assets'),
-        publicPath: '/assets/',
+        path: path.join(__dirname, '../' + ASSETS_ROOT),
+        publicPath: PUBLIC_PATH,
         filename: '[name].js'
     },
     plugins: [
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require(path.join(__dirname, 'assets/lib-manifest.json')),
+            manifest: require(path.resolve(__dirname, LIB_MANIFEST)),
         })
     ]
 };

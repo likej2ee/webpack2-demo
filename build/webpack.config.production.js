@@ -2,12 +2,12 @@ var path = require('path');
 var fs = require("fs");
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var config = require('../config');
 
-// const CDN_DOMAIN = 'http://wpic.yidianchina.com';
-const CDN_DOMAIN = '';
-const ASSETS_DIRECTORY = '/assets/';
-const PUBLIC_PATH = CDN_DOMAIN + ASSETS_DIRECTORY;
-const WEBPACK_MANIFEST = './assets/webpack-manifest.json';
+const ASSETS_DOMAIN = config.production.assetsDomain;
+const ASSETS_ROOT = config.constants.assetsRoot;
+const PUBLIC_PATH = ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/';
+const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
 
 module.exports = {
     output: {
@@ -48,10 +48,10 @@ module.exports = {
                     if (value instanceof Array) {
                         for (var i in value) {
                             var item = value[i];
-                            manifest[ASSETS_DIRECTORY + key + '.' + getFileExtension(item)] = PUBLIC_PATH + item;
+                            manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = PUBLIC_PATH + item;
                         }
                     } else {
-                        manifest[ASSETS_DIRECTORY + key + '.' + getFileExtension(value)] = PUBLIC_PATH + value;
+                        manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = PUBLIC_PATH + item;
                     }
                 }
 

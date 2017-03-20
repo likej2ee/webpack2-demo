@@ -5,10 +5,13 @@ var revReplace = require('gulp-rev-replace');
 var runSequence = require('run-sequence');
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
+var config = require('./config');
 
-const WEBPACK_MANIFEST = './assets/webpack-manifest.json';
-const BUILD_ASSETS_DIRECTORY = './assets/';
-const BUILD_ASSETS_FILES = ['./assets/**/*.*'];
+const ASSETS_ROOT = config.constants.assetsRoot;
+const WEBPACK_MANIFEST = './' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
+
+const BUILD_ASSETS_DIRECTORY = './' + ASSETS_ROOT + '/';
+const BUILD_ASSETS_FILES = ['./' + ASSETS_ROOT + '/**/*.*'];
 const HTML_FILES = ['./src/**/*.html', '!./src/lib/**/*'];
 
 // 错误处理函数
@@ -37,7 +40,9 @@ gulp.task('webserver', function() {
             enable: true,
             filter: function(fileName, callback) { // 路径区分mac和window
                 callback(!/\.svn/.test(fileName) &&
-                    (/\.html$/.test(fileName) || /\/assets\//.test(fileName) || /\\assets\\/.test(fileName)));
+                    (/\.html$/.test(fileName) ||
+                        new RegExp('/' + ASSETS_ROOT + '/').test(fileName) || // mac目录分隔符 '/'
+                        new RegExp('\\\\' + ASSETS_ROOT + '\\\\').test(fileName))); // win目录分隔符 '\'
             }
         },
         defaultFile: './src/views/demo/demo.html',
@@ -55,8 +60,8 @@ gulp.task('webserver', function() {
 
 // dev run webpack --watch
 gulp.task('webpack-watch', function(callback) {
-    var webpackConfig = require('./webpack.config.common.js');
-    var webpackConfigDev = require('./webpack.config.dev.js');
+    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigDev = require('./build/webpack.config.dev.js');
     var config = webpackMerge(webpackConfig, webpackConfigDev);
     var finished = false;
     webpack(config).watch({
@@ -81,7 +86,7 @@ gulp.task('webpack-watch', function(callback) {
 
 // dev 动态链接库
 gulp.task('webpack-build-dll-dev', function(callback) {
-    var webpackConfigDll = require('./webpack.dll.dev.js');
+    var webpackConfigDll = require('./build/webpack.dll.dev.js');
     var config = webpackMerge(webpackConfigDll, {});
     webpack(config).run(function(err, stats) {
         if (err) {
@@ -96,8 +101,8 @@ gulp.task('webpack-build-dll-dev', function(callback) {
 
 // dev run webpack
 gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
-    var webpackConfig = require('./webpack.config.common.js');
-    var webpackConfigDev = require('./webpack.config.dev.js');
+    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigDev = require('./build/webpack.config.dev.js');
     var config = webpackMerge(webpackConfig, webpackConfigDev);
     webpack(config).run(function(err, stats) {
         if (err) {
@@ -114,8 +119,9 @@ gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
 
 // production 动态链接库
 gulp.task('webpack-build-dll-production', function(callback) {
-    var webpackConfigDll = require('./webpack.dll.dev.js');
-    var webpackConfigDllProduction = require('./webpack.dll.production.js');
+    process.env.NODE_ENV = 'production'; // 设置生产环境标志，部分webpack配置区分环境
+    var webpackConfigDll = require('./build/webpack.dll.dev.js');
+    var webpackConfigDllProduction = require('./build/webpack.dll.production.js');
     var config = webpackMerge(webpackConfigDll, webpackConfigDllProduction);
     webpack(config).run(function(err, stats) {
         if (err) {
@@ -130,9 +136,9 @@ gulp.task('webpack-build-dll-production', function(callback) {
 
 // production run webpack
 gulp.task('webpack-build-production', ['webpack-build-dll-production'], function(callback) {
-    process.env.NODE_ENV = 'production'; // 为了使生产环境应用scss的压缩
-    var webpackConfig = require('./webpack.config.common.js');
-    var webpackConfigProduction = require('./webpack.config.production.js');
+    process.env.NODE_ENV = 'production'; // 设置生产环境标志，部分webpack配置区分环境
+    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigProduction = require('./build/webpack.config.production.js');
     var config = webpackMerge(webpackConfig, webpackConfigProduction);
     webpack(config).run(function(err, stats) {
         if (err) {
@@ -148,10 +154,10 @@ gulp.task('webpack-build-production', ['webpack-build-dll-production'], function
 gulp.task('release-html', function() {
     return gulp.src(HTML_FILES)
         .pipe(revReplace({
-            manifest: gulp.src('./assets/webpack-manifest.json'),
+            manifest: gulp.src(WEBPACK_MANIFEST),
             replaceInExtensions: ['.html']
         }))
-        .pipe(gulp.dest('./assets-html'));
+        .pipe(gulp.dest('./' + ASSETS_ROOT + '-html'));
 });
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>> production end <<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
