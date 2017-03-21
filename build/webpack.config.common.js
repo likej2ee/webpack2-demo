@@ -78,8 +78,8 @@ module.exports = {
         ],
         extensions: ['.js'],
         alias: {
-            'jquery$': 'lib/jquery/dist/jquery',
-            'vue$': 'lib/vue/dist/vue'
+            'jquery$': 'lib/jquery/dist/jquery.js',
+            'vue$': 'lib/vue/dist/vue.js'
             // 'a$': 'lib/a',
             // 'b$': 'lib/b',
             // 'c$': 'lib/c'
@@ -100,7 +100,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DllReferencePlugin({
-            context: __dirname,
+            context: path.resolve(__dirname, '../src'),
             manifest: require(path.resolve(__dirname, LIB_MANIFEST)),
         })
     ]

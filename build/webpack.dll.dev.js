@@ -27,6 +27,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DllPlugin({
+            context: path.resolve(__dirname, '../src'),
             path: path.resolve(__dirname, LIB_MANIFEST),
             name: '[name]_[hash]'
         })
