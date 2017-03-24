@@ -56,8 +56,8 @@ module.exports = {
         }, {
             test: /\.scss$/,
             include: /^(?=.*views)(?!.*_base)|(?=.*ucenter)(?!.*_base)/,
-            loader: ExtractTextPlugin.extract({
-                loader: [
+            use: ExtractTextPlugin.extract({
+                use: [
                     'css-loader',
                     'postcss-loader',
                     {
@@ -68,7 +68,7 @@ module.exports = {
                         }
                     }
                 ],
-                fallbackLoader: 'style-loader' // use style-loader extract css file
+                fallback: 'style-loader' // use style-loader extract css file
             })
         }]
     },
