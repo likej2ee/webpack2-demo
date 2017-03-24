@@ -6,21 +6,19 @@ var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
 const ASSETS_ROOT = config.constants.assetsRoot;
-const PUBLIC_PATH = ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/';
 const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
 
 module.exports = {
     output: {
-        publicPath: PUBLIC_PATH,
+        publicPath: ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/',
         filename: '[name]-[chunkhash].js'
     },
     plugins: [
         // 生成hash文件
         new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            },
+            'process.env.NODE_ENV': JSON.stringify('production'),
             __DEV__: false,
+            __TEST__: false,
             __PRODUCTION__: true
         }),
         new webpack.optimize.CommonsChunkPlugin({
@@ -33,6 +31,8 @@ module.exports = {
         }),
         // 生产压缩优化
         function() {
+            var publicPath = this.options.output.publicPath;
+
             // 获取文件后缀明
             var getFileExtension = function(fileName) {
                 var array = fileName.split('.');
@@ -48,10 +48,10 @@ module.exports = {
                     if (value instanceof Array) {
                         for (var i in value) {
                             var item = value[i];
-                            manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = PUBLIC_PATH + item;
+                            manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = publicPath + item;
                         }
                     } else {
-                        manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = PUBLIC_PATH + item;
+                        manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(value)] = publicPath + value;
                     }
                 }
 

@@ -6,6 +6,7 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             __DEV__: true,
+            __TEST__: false,
             __PRODUCTION__: false
         }),
         new ExtractTextPlugin({

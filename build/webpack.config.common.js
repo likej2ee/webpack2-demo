@@ -3,10 +3,11 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = require('../config');
 
+const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
 const ASSETS_ROOT = config.constants.assetsRoot;
 const PUBLIC_PATH = '/' + ASSETS_ROOT + '/';
 const LIB_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.libManifest;
-const INCLUDE_PATHS = path.resolve(__dirname, "./src/core");
+const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT +'/core');
 
 module.exports = {
     module: {
@@ -74,10 +75,11 @@ module.exports = {
     resolve: { // 解决路径问题，可简化 alias entry 的路径配置
         modules: [
             // 'node_modules',
-            path.join(__dirname, '../src')
+            path.join(__dirname, '../' + SOURCE_CODE_ROOT)
         ],
         extensions: ['.js'],
         alias: {
+            'browser-polyfill$': 'lib/babel-polyfill/browser-polyfill.js',
             'jquery$': 'lib/jquery/dist/jquery.js',
             'vue$': 'lib/vue/dist/vue.js'
             // 'a$': 'lib/a',
@@ -100,7 +102,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DllReferencePlugin({
-            context: path.resolve(__dirname, '../src'),
+            context: path.resolve(__dirname, '../' + SOURCE_CODE_ROOT),
             manifest: require(path.resolve(__dirname, LIB_MANIFEST)),
         })
     ]

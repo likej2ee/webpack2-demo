@@ -3,7 +3,9 @@
 
 /.idea/
 /*.DS_Store
+
 /node_modules/
 /src/lib/
+
 /assets/
-/assets-html/
+/www/

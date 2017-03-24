@@ -1,11 +1,14 @@
 {
     "_comment": "See http://eslint.cn/docs/rules/ for more details",
+    "extends": "eslint:recommended", # 启用eslint推荐配置
     "env": {
         "browser": true,
+        "es6": true,
+        "amd": true
     },
     "globals": {
-        "__DEV_ECLIPSE__": true,
         "__DEV__": true,
+        "__TEST__": true,
         "__PRODUCTION__": true,
         "__dirname": true,
 
@@ -21,21 +24,24 @@
         "sourceType": "module"
     },
     "rules": {
-        // Possible Errors
+        # Possible Errors
         "no-cond-assign": [2, "always"],
         "no-console": 0,
 
-        // Stylistic Issues
-        "camelcase": 2,
-        "comma-dangle": [2, "never"],
-        "curly": 2,
+        # Stylistic Issues
+        # "camelcase": 2, 强制使用骆驼拼写法命名约定
+        # "comma-dangle": [2, "never"],     要求或禁止末尾逗号
+        # "curly": 2,   要求遵循大括号约定
         "brace-style": [2, "1tbs"],
-        "indent": [2, 4],
+        # "indent": [2, 4, {    强制使用一致的缩进
+        #     "SwitchCase": 1,
+        #     "MemberExpression": 1
+        # }],
         "keyword-spacing": [2, {
             "before": true,
             "after": true
         }],
-        "linebreak-style": [2, "unix"],
+        # "linebreak-style": [2, "unix"], 强制使用一致的换行符风格
         "quotes": [2, "single"],
         "semi": [2, "always"],
         "space-infix-ops": [2, {
