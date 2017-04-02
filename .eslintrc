@@ -43,7 +43,8 @@
         }],
         # "linebreak-style": [2, "unix"], 强制使用一致的换行符风格
         "quotes": [2, "single"],
-        "semi": [2, "always"],
+        # "semi": [2, "always"],
+        "no-unexpected-multiline": [2],
         "space-infix-ops": [2, {
             "int32Hint": false
         }],

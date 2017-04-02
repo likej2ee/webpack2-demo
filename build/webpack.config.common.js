@@ -7,7 +7,7 @@ const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
 const ASSETS_ROOT = config.constants.assetsRoot;
 const PUBLIC_PATH = '/' + ASSETS_ROOT + '/';
 const LIB_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.libManifest;
-const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT +'/core');
+const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT + '/core');
 
 module.exports = {
     module: {
@@ -80,8 +80,11 @@ module.exports = {
         extensions: ['.js'],
         alias: {
             'browser-polyfill$': 'lib/babel-polyfill/browser-polyfill.js',
+            'vue$': 'lib/vue/dist/vue.js',
+            'axios$': 'lib/axios/dist/axios.min.js',
             'jquery$': 'lib/jquery/dist/jquery.js',
-            'vue$': 'lib/vue/dist/vue.js'
+            'velocity$': 'lib/velocity/velocity.min.js',
+            'lodash$': 'lib/lodash/dist/lodash.min.js'
             // 'a$': 'lib/a',
             // 'b$': 'lib/b',
             // 'c$': 'lib/c'
@@ -90,10 +93,10 @@ module.exports = {
     entry: {
         'core': 'core/core.js',
         'base': 'views/_base/base.js',
-        'demo/demo': 'views/demo/demo.js',
-        'index/index': 'views/index/index.js',
-        'one/one': 'views/one/one.js',
-        'two/two': 'views/two/two.js'
+        // 'index/index': 'views/index/index.js',
+        // 'one/one': 'views/one/one.js',
+        // 'two/two': 'views/two/two.js',
+        'demo/demo': 'views/demo/demo.js'
     },
     output: {
         path: path.join(__dirname, '../' + ASSETS_ROOT),

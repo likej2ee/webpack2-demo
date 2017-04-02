@@ -15,9 +15,10 @@ module.exports = {
     },
     entry: {
         'lib': [
-            'lib/jquery/dist/jquery',
+            'lib/babel-polyfill/browser-polyfill',
+            // 'lib/jquery/dist/jquery',
             'lib/vue/dist/vue',
-            'lib/babel-polyfill/browser-polyfill'
+            'lib/axios/dist/axios.min'
         ]
     },
     output: {
