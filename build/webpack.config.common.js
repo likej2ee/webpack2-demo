@@ -81,9 +81,11 @@ module.exports = {
         alias: {
             'browser-polyfill$': 'lib/babel-polyfill/browser-polyfill.js',
             'vue$': 'lib/vue/dist/vue.js',
+            'vue-router$': 'lib/vue-router/dist/vue-router.min.js',
             'axios$': 'lib/axios/dist/axios.min.js',
             'jquery$': 'lib/jquery/dist/jquery.js',
             'velocity$': 'lib/velocity/velocity.min.js',
+            'tween$': 'lib/tween.js/src/Tween.js',
             'lodash$': 'lib/lodash/dist/lodash.min.js'
             // 'a$': 'lib/a',
             // 'b$': 'lib/b',
@@ -92,10 +94,11 @@ module.exports = {
     },
     entry: {
         'core': 'core/core.js',
-        'base': 'views/_base/base.js',
+        // 'base': 'views/_base/base.js',
         // 'index/index': 'views/index/index.js',
         // 'one/one': 'views/one/one.js',
         // 'two/two': 'views/two/two.js',
+        'clear/clear': 'views/clear/clear.js',
         'demo/demo': 'views/demo/demo.js'
     },
     output: {

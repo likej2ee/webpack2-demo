@@ -1,0 +1,29 @@
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s ease;
+}
+.fade-enter,
+.fade-leave-active {
+    opacity: 0;
+}
+.child-view {
+    top: 200px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
+
+    transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+.slide-left-enter,
+.slide-right-leave-active {
+    transform: translate(30px, 0);
+
+    opacity: 0;
+}
+.slide-left-leave-active,
+.slide-right-enter {
+    transform: translate(-30px, 0);
+
+    opacity: 0;
+}

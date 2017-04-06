@@ -24,6 +24,8 @@
     "babel-polyfill": "^0.0.1",
     "axios": "^0.15.3",
     "animate.css": "^3.5.2",
-    "velocity": "^1.5.0"
+    "velocity": "^1.5.0",
+    "tween.js": "tweenjs#^16.6.0",
+    "vue-router": "^2.3.1"
   }
 }
