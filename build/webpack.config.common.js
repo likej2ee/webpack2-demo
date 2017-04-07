@@ -84,9 +84,10 @@ module.exports = {
             'vue-router$': 'lib/vue-router/dist/vue-router.min.js',
             'axios$': 'lib/axios/dist/axios.min.js',
             'jquery$': 'lib/jquery/dist/jquery.js',
+            'lodash$': 'lib/lodash/dist/lodash.min.js',
             'velocity$': 'lib/velocity/velocity.min.js',
             'tween$': 'lib/tween.js/src/Tween.js',
-            'lodash$': 'lib/lodash/dist/lodash.min.js'
+            'iSlider$': 'lib/iSlider/build/index.bundle.js',
             // 'a$': 'lib/a',
             // 'b$': 'lib/b',
             // 'c$': 'lib/c'
