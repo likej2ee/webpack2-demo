@@ -1,0 +1,11 @@
+.label {
+    &.label-info {
+        color: blue;
+    }
+    &.label-warning {
+        color: red;
+    }
+    &.label-success {
+        color: green;
+    }
+}

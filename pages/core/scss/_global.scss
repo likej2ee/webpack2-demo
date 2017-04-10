@@ -1,0 +1,80 @@
+@charset 'utf-8';
+////
+/// 原子类型样式
+///
+/// 使用方法：不能重新定义/重置本文件内样式(除了项目差异)
+///
+/// @group undefined
+/// @author xjq
+////
+// single attribute
+// -----------------------------------------------------------------------------
+.oh {
+    overflow: hidden;
+}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.ng-hide {
+    display: none !important;
+}
+
+.ng-show {
+    display: block !important;
+}
+
+.rel {
+    position: relative;
+}
+
+.abs {
+    position: absolute;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.line-through {
+    text-decoration: line-through;
+}
+.underline {
+    text-decoration: underline;
+}
+
+// clear float
+// -----------------------------------------------------------------------------
+.clear {
+    font-size: 0;
+
+    clear: both;
+    overflow: hidden;
+
+    height: 0;
+}
+
+.clearfix:after {
+    display: block;
+    clear: both;
+
+    height: 0;
+
+    content: '\0020';
+}
+
+.clearfix {
+    zoom: 1;
+}

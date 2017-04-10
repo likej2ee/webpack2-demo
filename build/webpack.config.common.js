@@ -70,6 +70,31 @@ module.exports = {
                 ],
                 fallback: 'style-loader' // use style-loader extract css file
             })
+        }, {
+            test: /\.html$/,
+            use: 'html-loader'
+        }, {
+            test: /(\.png)|(\.jpg)|(\.jpeg)|(\.gif)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 7000,
+                    name: 'staticimg/[name].[hash:7].[ext]'
+                }
+            }
+        }, {
+            test: /(\.ttf)|(\.eot)|(\.svg)|(\.woff)$/,
+            include: /^(?=.*fonts)/,
+            use: {
+                loader: 'file-loader',
+                options: {
+                    name: 'static/fonts/[name].[hash:7].[ext]'
+                }
+            }
+        }, {
+            test: /\.htc$/,
+            include: /^(?=.*lib)/,
+            use: 'file-loader'
         }]
     },
     resolve: { // 解决路径问题，可简化 alias entry 的路径配置
@@ -87,19 +112,13 @@ module.exports = {
             'lodash$': 'lib/lodash/dist/lodash.min.js',
             'velocity$': 'lib/velocity/velocity.min.js',
             'tween$': 'lib/tween.js/src/Tween.js',
-            'iSlider$': 'lib/iSlider/build/index.bundle.js',
-            // 'a$': 'lib/a',
-            // 'b$': 'lib/b',
-            // 'c$': 'lib/c'
+            'iSlider$': 'lib/iSlider/build/index.bundle.js'
         }
     },
     entry: {
         'core': 'core/core.js',
         // 'base': 'views/_base/base.js',
         // 'index/index': 'views/index/index.js',
-        // 'one/one': 'views/one/one.js',
-        // 'two/two': 'views/two/two.js',
-        'clear/clear': 'views/clear/clear.js',
         'demo/demo': 'views/demo/demo.js'
     },
     output: {

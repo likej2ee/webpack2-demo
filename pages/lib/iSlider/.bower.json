@@ -1,0 +1,54 @@
+{
+  "name": "iSlider",
+  "homepage": "https://github.com/BE-FE/iSlider",
+  "description": "Smooth and high-performance slide web framework. Suitable for PC, Mobile WebApp, HTML5 App, Hybrid App",
+  "main": [
+    "build/iSlider.min.js",
+    "build/iSlider.min.css"
+  ],
+  "keywords": [
+    "smooth",
+    "hybrid",
+    "mobile",
+    "performance",
+    "slide",
+    "slider",
+    "animate",
+    "effect",
+    "mobile",
+    "iSlider.js",
+    "javascript",
+    "lightweight",
+    "plug-in",
+    "easy to expand"
+  ],
+  "authors": [
+    "qbaty",
+    "xieyu33333",
+    "shinate"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    ".idea",
+    "*.iml",
+    "node_modules",
+    "demo",
+    "test",
+    "thumbnails",
+    "karma.conf.js",
+    "gulpfile.js",
+    "index.html",
+    "gulp"
+  ],
+  "version": "2.2.2",
+  "_release": "2.2.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.2.2",
+    "commit": "09ed6cc88f2890b289132403270ca3664b78b855"
+  },
+  "_source": "https://github.com/BE-FE/iSlider.git",
+  "_target": "^2.2.2",
+  "_originalSource": "iSlider"
+}
