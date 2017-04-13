@@ -17,7 +17,8 @@
         "avalon": true,
         "Vue": true,
 
-        "AGL": true
+        "AGL": true,
+        "wx": true
     },
     "parserOptions": {
         "ecmaVersion": 6,

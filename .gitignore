@@ -5,7 +5,7 @@
 /*.DS_Store
 
 /node_modules/
-/src/lib/
+/pages/lib/
 
 /assets/
 /www/

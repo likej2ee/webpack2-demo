@@ -104,6 +104,7 @@ module.exports = {
         ],
         extensions: ['.js'],
         alias: {
+            'url-search-params-polyfill$': 'lib/url-search-params/build/url-search-params.amd.js',
             'browser-polyfill$': 'lib/babel-polyfill/browser-polyfill.js',
             'vue$': 'lib/vue/dist/vue.js',
             'vue-router$': 'lib/vue-router/dist/vue-router.min.js',
@@ -112,7 +113,15 @@ module.exports = {
             'lodash$': 'lib/lodash/dist/lodash.min.js',
             'velocity$': 'lib/velocity/velocity.min.js',
             'tween$': 'lib/tween.js/src/Tween.js',
-            'iSlider$': 'lib/iSlider/build/index.bundle.js'
+            'iSlider$': 'lib/iSlider/build/index.bundle.js',
+            'toastr$': 'lib/toastr/toastr.js',
+            'toastrcss$': 'lib/toastr/toastr.min.css',
+
+            // 自定义插件
+            'audio$': 'lib-manual/audio.js',
+
+            // service
+            'apiService$': 'service/_api.js'
         }
     },
     entry: {

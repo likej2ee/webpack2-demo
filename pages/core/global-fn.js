@@ -1,106 +1,26 @@
 window.AGL = window.AGL || {};
 
-// 下面为《HTML5 Canvas 核心技术》给出的兼容主流浏览器的requestNextAnimationFrame
-// 和 cancelNextRequestAnimationFrame方法
-window.requestAnimationFrame = (function() {
-    /* eslint no-unused-vars: "off" */
-    var originalWebkitRequestAnimationFrame = undefined,
-        wrapper = undefined,
-        callback = undefined,
-        geckoVersion = 0,
-        userAgent = navigator.userAgent,
-        index = 0,
-        self = this;
-
-    // Workaround for Chrome 10 bug where Chrome
-    // does not pass the time to the animation function
-
-    if (window.webkitRequestAnimationFrame) {
-        // Define the wrapper
-
-        wrapper = function(time) {
-            if (time === undefined) {
-                time = +new Date();
-            }
-            self.callback(time);
-        };
-
-        // Make the switch
-
-        originalWebkitRequestAnimationFrame = window.webkitRequestAnimationFrame;
-
-        window.webkitRequestAnimationFrame = function(callback, element) {
-            self.callback = callback;
-
-            // Browser calls the wrapper and wrapper calls the callback
-
-            originalWebkitRequestAnimationFrame(wrapper, element);
-        }
-    }
-
-    // Workaround for Gecko 2.0, which has a bug in
-    // mozRequestAnimationFrame() that restricts animations
-    // to 30-40 fps.
-
-    if (window.mozRequestAnimationFrame) {
-        // Check the Gecko version. Gecko is used by browsers
-        // other than Firefox. Gecko 2.0 corresponds to
-        // Firefox 4.0.
-
-        index = userAgent.indexOf('rv:');
-
-        if (userAgent.indexOf('Gecko') != -1) {
-            geckoVersion = userAgent.substr(index + 3, 3);
-
-            if (geckoVersion === '2.0') {
-                // Forces the return statement to fall through
-                // to the setTimeout() function.
-
-                window.mozRequestAnimationFrame = undefined;
-            }
-        }
-    }
-
-    return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimationFrame ||
-
-        function(callback, element) {
-            var start,
-                finish;
-
-            window.setTimeout(function() {
-                start = +new Date();
-                callback(start);
-                finish = +new Date();
-
-                self.timeout = 1000 / 60 - (finish - start);
-
-            }, self.timeout);
-
-        };
-}());
-
-if (!window.cancelAnimationFrame) {
-    window.cancelAnimationFrame = (window.cancelRequestAnimationFrame ||
-        window.webkitCancelAnimationFrame || window.webkitCancelRequestAnimationFrame ||
-        window.mozCancelAnimationFrame || window.mozCancelRequestAnimationFrame ||
-        window.msCancelAnimationFrame || window.msCancelRequestAnimationFrame ||
-        window.oCancelAnimationFrame || window.oCancelRequestAnimationFrame ||
-        window.clearTimeout);
-}
-
 /**
  * 随机指定范围内N个不重复的数
  * 最简单最基本的方法
  * @param  {Number} min 指定范围最小值
  * @param  {Number} max 指定范围最大值
  * @param  {Number} n   随机数个数
+ * @param  {Number} isCustomAlgorithm   是否使用自定义随机数算法
  * @return {Object}     返回随机数数组
  */
-window.AGL.randomCommon = function(min, max, n) {
+window.AGL.randomRange = function(min, max, n, isCustomAlgorithm) {
+
+    // 随机数
+    var random = function() {
+        if (!isCustomAlgorithm) {
+            return Math.random()
+        }
+        var seed = new Date().getTime(); // 时间种子
+        seed = (seed * 9301 + 49297) % 233280; //为何使用这三个数?
+        return seed / (233280.0);
+    }
+
     var result = [];
     if (n > (max - min + 1) || max < min) {
         return result;
@@ -110,7 +30,7 @@ window.AGL.randomCommon = function(min, max, n) {
     var flag = false;
 
     while (count < n) {
-        num = Math.round(Math.random() * (max - min)) + min;
+        num = Math.round(random() * (max - min)) + min;
         flag = true;
         for (var j = 0; j < n; j++) {
             if (num === result[j]) {
@@ -124,6 +44,31 @@ window.AGL.randomCommon = function(min, max, n) {
         }
     }
     return result;
+}
+
+/**
+ * 获取浏览器参数值
+ * 若需要在Controller中使用，可直接使用$location.$$search.name获得
+ * @param  {String} name    参数名称
+ * @param  {String} s       待查询的链接
+ * @return {String}         参数值
+ */
+AGL.getQueryStringRegExp = function(name, s) {
+    var reg = new RegExp('(^|\\?|&)' + name + '=([^&]*)(\\s|&|$)', 'i');
+    var uri = '';
+    if (s) {
+        uri = decodeURIComponent(s);
+    } else {
+        uri = window.location.search;
+        if (!uri) {
+            uri = window.location.href;
+        }
+    }
+    if (reg.test(uri)) {
+        var result = decodeURIComponent(RegExp.$2.replace(/\+/g, ' '));
+        return result === '' ? '' : result;
+    }
+    return '';
 }
 
 /**
@@ -193,3 +138,61 @@ AGL.setTitle = function(title) {
         document.body.appendChild(i);
     }
 }
+
+/**
+ * 微信重置分享内容
+ * @param  {String} title   分享标题
+ * @param  {String} content 分享内容
+ * @param  {String} pic     分享图片url
+ * @param  {String} url     分享内容跳转链接
+ * @param  {Object} options 扩展对象
+ * @return {type}
+ */
+AGL.wechatResetShare = function(title, content, pic, url, options) {
+    if (!AGL.isWeChatBrowser()) return;
+    try {
+        var defaultPic = require('core/images/share.jpg'); // 生产上该路径为全路径
+
+        // 测试环境需要重置下，补全路径
+        // if (__TEST__) {
+        //     defaultPic = AGL.appConfig.staticDomain + AGL.appConfig.releaseDir + '/' + defaultPic;
+        // }
+        var shareConfig = {
+            title: title, // 分享标题
+            desc: content, // 分享描述
+            link: url || window.location.href, // 分享链接
+            imgUrl: pic || defaultPic, // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function() {
+                // 用户确认分享后执行的回调函数
+                if (typeof options.success === 'function') {
+                    options.success();
+                }
+            },
+            cancel: function() {
+                // 用户取消分享后执行的回调函数
+                if (typeof options.cancel === 'function') {
+                    options.cancel();
+                }
+            }
+        };
+
+        wx.ready(function() {
+            //分享到朋友圈
+            wx.onMenuShareTimeline(shareConfig);
+            // 分享给朋友
+            wx.onMenuShareAppMessage(shareConfig);
+            // 分享到QQ
+            wx.onMenuShareQQ(shareConfig);
+            // 分享到腾讯微博
+            wx.onMenuShareWeibo(shareConfig);
+            // 分享到QQ空间
+            wx.onMenuShareQZone(shareConfig);
+        });
+    } catch (e) {
+        // console.log('wechatResetShare error');
+    } finally {
+        // console.log('wechatResetShare finally');
+    }
+};

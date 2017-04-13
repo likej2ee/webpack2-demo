@@ -1,14 +1,22 @@
 // 核心包，引入一些常量定义、网站配置项、公共函数、公共样式
 import './core.scss';
 
-require('browser-polyfill');
-require('./config.js'); // 项目配置参数
-require('./global-constant.js'); // 公共常量
-require('./global-fn.js'); // 公共函数
+// 处理全局对象兼容性
+import 'browser-polyfill';
+import URLSearchParams from 'url-search-params-polyfill';
+window.URLSearchParams = URLSearchParams;
 
-window.Vue = require('vue');
-window.VueRouter = require('vue-router');
+// 引入公共脚本
+import './app-config.js'; // 项目配置参数
+import './global-constant.js'; // 公共常量
+import './global-fn.js'; // 公共函数
+import Vue from 'vue';
+// import VueRouter from 'vue-router';
 
-// if (__PRODUCTION__) {
-//
-// }
+// 暴露全局定义
+window.Vue = Vue;
+// window.VVueRouterue = VueRouter;
+
+if (__PRODUCTION__) {
+    console.log('production');
+}

@@ -51,10 +51,10 @@ gulp.task('webserver', function() {
         defaultFile: './' + SOURCE_CODE_ROOT + '/views/demo/demo.html',
         // directoryListing: true,
         open: true,
-        port: 8888
+        port: 8899
     };
     if (/^darwin/.test(process.platform)) {
-        serverConfig.host = '0.0.0.0';
+        serverConfig.host = '127.0.0.1';
         serverConfig.livereload.port = 36666;
     }
     return gulp.src('./')
