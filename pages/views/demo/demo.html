@@ -15,9 +15,21 @@
 
 <body>
     <div id="example">
-        {{name}}
+        <div class="message-panel">
+            <div class="rel">
+                <div class="shadow" id="j-message-shadow"></div>
+            </div>
+            <ul class="list" id="j-message-list" :class="{'scroll': isScroll}" @mousewheel="isScroll = true" @mouseleave="isScroll = false">
+                <li v-for="(item, index) in list" class="item">
+                    <span class="message j-message">{{item}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="send-panel">
+            <input type="text" name="" value="" v-model="text">
+            <button @click="sendMessage">发送</button>
+        </div>
     </div>
-
     <script src="/assets/demo/demo.js"></script>
 </body>
 
