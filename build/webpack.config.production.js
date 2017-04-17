@@ -2,6 +2,7 @@ var path = require('path');
 var fs = require("fs");
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var WebpackMd5Hash = require('webpack-md5-hash');
 var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
@@ -11,7 +12,8 @@ const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackMan
 module.exports = {
     output: {
         publicPath: ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/',
-        filename: '[name]-[chunkhash].js'
+        filename: '[name]-[chunkhash].js',
+        chunkFilename: '[chunkhash].chunk.js'
     },
     plugins: [
         // 生成hash文件
@@ -21,13 +23,14 @@ module.exports = {
             __TEST__: false,
             __PRODUCTION__: true
         }),
+        new WebpackMd5Hash(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
-            filename: 'common-[chunkhash].js',
+            filename: 'common-[hash].js',
             minChunks: 5,
         }),
         new ExtractTextPlugin({
-            filename: '[name]-[chunkhash].css'
+            filename: '[name]-[contenthash:20].css'
         }),
         // 生产压缩优化
         function() {
