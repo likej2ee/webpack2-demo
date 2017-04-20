@@ -7,10 +7,13 @@ if (__DEV__) {
     }
 }
 
-//
-// if (__TEST__) {
-//     console.log('测试环境输出');
-// }
+
+if (__TEST__) {
+    window.AGL.appConfig = {
+        service: 'http://127.0.0.1/api/',
+        domain: 'http://twww.xxx.com'
+    }
+}
 
 if (__PRODUCTION__) {
     window.AGL.appConfig = {

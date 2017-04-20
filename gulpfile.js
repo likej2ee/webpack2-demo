@@ -63,9 +63,9 @@ gulp.task('webserver', function() {
 
 // dev run webpack --watch
 gulp.task('webpack-watch', ['webpack-build-dll-dev'], function(callback) {
-    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigDev = require('./build/webpack.config.dev.js');
-    var merageConfig = webpackMerge(webpackConfig, webpackConfigDev);
+    var merageConfig = webpackMerge(webpackConfigDev, webpackConfigCommon);
     var finished = false;
     webpack(merageConfig).watch({
         aggregateTimeout: 300,
@@ -109,9 +109,9 @@ gulp.task('webpack-build-dll-dev', function(callback) {
 
 // dev run webpack
 gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
-    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigDev = require('./build/webpack.config.dev.js');
-    var merageConfig = webpackMerge(webpackConfig, webpackConfigDev);
+    var merageConfig = webpackMerge(webpackConfigDev, webpackConfigCommon);
     webpack(merageConfig).run(function(err, stats) {
         if (err) {
             errorHandler('webpack-build-dev', err);
@@ -151,9 +151,9 @@ gulp.task('webpack-build-dll-production', function(callback) {
 // production run webpack
 gulp.task('webpack-build-production', ['webpack-build-dll-production'], function(callback) {
     process.env.NODE_ENV = 'production'; // 设置生产环境标志，部分webpack配置区分环境
-    var webpackConfig = require('./build/webpack.config.common.js');
+    var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigProduction = require('./build/webpack.config.production.js');
-    var merageConfig = webpackMerge(webpackConfig, webpackConfigProduction);
+    var merageConfig = webpackMerge(webpackConfigProduction, webpackConfigCommon);
 
     // 获取参数，制定测试环境资源发布地址
     var options = minimist(process.argv.slice(2));

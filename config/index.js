@@ -9,7 +9,6 @@ module.exports = {
     },
     production: {
         assetsDomain: 'http://127.0.0.1:8888' // 资源所在位置的域名
-
     },
     test: {
         assetsDomain: ''
