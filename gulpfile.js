@@ -65,7 +65,7 @@ gulp.task('webserver', function() {
 gulp.task('webpack-watch', ['webpack-build-dll-dev'], function(callback) {
     var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigDev = require('./build/webpack.config.dev.js');
-    var merageConfig = webpackMerge(webpackConfigDev, webpackConfigCommon);
+    var merageConfig = webpackMerge(webpackConfigCommon, webpackConfigDev);
     var finished = false;
     webpack(merageConfig).watch({
         aggregateTimeout: 300,
@@ -111,7 +111,7 @@ gulp.task('webpack-build-dll-dev', function(callback) {
 gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
     var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigDev = require('./build/webpack.config.dev.js');
-    var merageConfig = webpackMerge(webpackConfigDev, webpackConfigCommon);
+    var merageConfig = webpackMerge(webpackConfigCommon, webpackConfigDev);
     webpack(merageConfig).run(function(err, stats) {
         if (err) {
             errorHandler('webpack-build-dev', err);
@@ -153,20 +153,21 @@ gulp.task('webpack-build-production', ['webpack-build-dll-production'], function
     process.env.NODE_ENV = 'production'; // 设置生产环境标志，部分webpack配置区分环境
     var webpackConfigCommon = require('./build/webpack.config.common.js');
     var webpackConfigProduction = require('./build/webpack.config.production.js');
-    var merageConfig = webpackMerge(webpackConfigProduction, webpackConfigCommon);
 
-    // 获取参数，制定测试环境资源发布地址
+    // 获取参数，指定测试环境资源发布地址
     var options = minimist(process.argv.slice(2));
     if (options.deploy === 'test') {
-        merageConfig.output.publicPath = config.test.assetsDomain + '/' + ASSETS_ROOT + '/';
-        merageConfig.plugins.shift();
-        merageConfig.plugins.unshift(new webpack.DefinePlugin({
+        webpackConfigProduction.output.publicPath = config.test.assetsDomain + '/' + ASSETS_ROOT + '/';
+        webpackConfigProduction.plugins.shift();
+        webpackConfigProduction.plugins.unshift(new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
             __DEV__: false,
             __TEST__: true,
             __PRODUCTION__: false
         }));
     }
+
+    var merageConfig = webpackMerge(webpackConfigCommon, webpackConfigProduction);
     webpack(merageConfig).run(function(err, stats) {
         if (err) {
             errorHandler('webpack-build-production', err);
