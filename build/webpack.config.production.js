@@ -8,12 +8,14 @@ var config = require('../config');
 const ASSETS_DOMAIN = config.production.assetsDomain;
 const ASSETS_ROOT = config.constants.assetsRoot;
 const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
+const LIB_MANIFEST_DATA = require('../' + ASSETS_ROOT + '/' + config.constants.libManifest);
+const LIB_CHUNKHASH = LIB_MANIFEST_DATA.name.substring(4, 8);
 
 module.exports = {
     output: {
         publicPath: ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/',
-        filename: '[name]-[chunkhash].js',
-        chunkFilename: '[chunkhash].chunk.js'
+        filename: '[name]-[chunkhash]' + LIB_CHUNKHASH + '.js',
+        chunkFilename: '[chunkhash].[id].chunk.js'
     },
     plugins: [
         // 生成hash文件
@@ -26,7 +28,7 @@ module.exports = {
         new WebpackMd5Hash(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
-            filename: 'common-[hash].js',
+            filename: 'common-[hash]' + LIB_CHUNKHASH + '.js',
             minChunks: 5,
         }),
         new ExtractTextPlugin({
@@ -44,8 +46,10 @@ module.exports = {
 
             // 生成manifest文件
             this.plugin('done', function(stats) {
-                var manifest = {},
-                    assets = stats.toJson().assetsByChunkName;
+
+                var manifest = {};
+                var assets = stats.toJson().assetsByChunkName;
+
                 for (var key in assets) {
                     var value = assets[key];
                     if (value instanceof Array) {
