@@ -1,29 +1,3 @@
 .volume {
     width: 100px;
-    margin-top: 20px;
-    input[type=range] {
-        opacity: 0;
-    }
-    .rangeslider--horizontal {
-        height: 5px;
-        &:after {
-            position: absolute;
-            top: -6px;
-            right: 0;
-            bottom: -6px;
-            left: 0;
-
-            content: ' ';
-        }
-        .rangeslider__handle {
-            top: -5px;
-
-            width: 14px;
-            height: 14px;
-            &:after {
-                width: 8px;
-                height: 8px;
-            }
-        }
-    }
 }
