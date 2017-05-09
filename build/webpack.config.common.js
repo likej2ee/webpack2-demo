@@ -116,6 +116,8 @@ module.exports = {
             'iSlider$': 'lib/iSlider/build/index.bundle.js',
             'toastr$': 'lib/toastr/toastr.js',
             'toastrcss$': 'lib/toastr/toastr.min.css',
+            'rangeslider$': 'lib/rangeslider.js/dist/rangeslider.js',
+            'rangeslidercss$': 'lib/rangeslider.js/dist/rangeslider.css',
 
             // 自定义插件
             'audio$': 'lib-manual/audio.js',

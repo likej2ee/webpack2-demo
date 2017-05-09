@@ -7,47 +7,39 @@ import $ from 'jquery';
 new Vue({
     el: '#example',
     data: {
-        text: '阿嘎神龙斗士来得及发熟练度解放路撒地方水电费阿斯蒂芬撒地方撒地方',
-        list: [1, 212312312, 3, '阿斯顿发斯蒂芬哈萨克东方红卡萨丁说的'],
-        isScroll: false
+
     },
     methods: {
-        sendMessage: function() {
-            this.list.push(this.text);
-
-            setTimeout(function() {
-                var $list = $('#j-message-list');
-                var $items = $list.find('.j-message')
-                var $currentItem = $items.last();
-
-                $currentItem.parent().fadeIn(1000);
-
-                var itemHeight = $currentItem.outerHeight();
-                var itemMarginBottom = parseInt($currentItem.css('margin-bottom'));
-
-
-                // $items.each(function (i) {
-                //     console.log($(this).offset().top);
-                //     var $this = $(this)
-                //     var offsetTop = $this.offset().top
-                //     if (offsetTop <= 0) {
-                //         $('#j-message-shadow').width($this.outerWidth());
-                //     }
-                // })
-
-                $list.stop(true, true).animate({
-                    scrollTop: $list.scrollTop() + itemHeight + itemMarginBottom
-                }, {
-                    speed: 5000,
-                    easing: 'linear'
-                })
-
-            })
-            // Velocity($list[0], {
-            //     translateY: -itemHeight
-            // }, {
-            //     duration: 500
-            // });
+        init() {
+            console.log('init');
         }
     }
+})
+
+require(['rangeslider', 'rangeslidercss'], function() {
+    $('#j-volume').rangeslider({
+
+        // Feature detection the default is `true`.
+        // Set this to `false` if you want to use
+        // the polyfill also in Browsers which support
+        // the native <input type="range"> element.
+        polyfill: false,
+
+        // Default CSS classes
+        rangeClass: 'rangeslider',
+        disabledClass: 'rangeslider--disabled',
+        horizontalClass: 'rangeslider--horizontal',
+        verticalClass: 'rangeslider--vertical',
+        fillClass: 'rangeslider__fill',
+        handleClass: 'rangeslider__handle',
+
+        // Callback function
+        onInit: function() {},
+
+        // Callback function
+        onSlide: function(position, value) {},
+
+        // Callback function
+        onSlideEnd: function(position, value) {}
+    });
 })

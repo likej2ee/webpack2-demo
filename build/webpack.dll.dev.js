@@ -16,7 +16,7 @@ module.exports = {
     entry: {
         'lib': [
             'lib/babel-polyfill/browser-polyfill',
-            // 'lib/jquery/dist/jquery',
+            'lib/jquery/dist/jquery',
             'lib/vue/dist/vue',
             'lib/axios/dist/axios.min',
             'lib/url-search-params/build/url-search-params.amd'

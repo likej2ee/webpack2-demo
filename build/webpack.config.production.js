@@ -29,7 +29,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common-[hash]' + LIB_CHUNKHASH + '.js',
-            minChunks: 5,
+            minChunks: Number.MAX_VALUE,
         }),
         new ExtractTextPlugin({
             filename: '[name]-[contenthash:20].css'
