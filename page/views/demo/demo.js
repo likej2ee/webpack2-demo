@@ -6,9 +6,7 @@ import $ from 'jquery';
 
 new Vue({
     el: '#example',
-    data: {
-
-    },
+    data: {},
     methods: {
         init() {
             console.log('init');
@@ -37,9 +35,15 @@ require(['rangeslider', 'rangeslidercss'], function() {
         onInit: function() {},
 
         // Callback function
-        onSlide: function(position, value) {},
+        onSlide: function(position, value) {
+            console.log(position);
+            console.log(value);
+        },
 
         // Callback function
-        onSlideEnd: function(position, value) {}
+        onSlideEnd: function(position, value) {
+            console.log(position);
+            console.log(value);
+        }
     });
 })
