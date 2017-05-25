@@ -4,12 +4,13 @@ var webpack = require('webpack');
 var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
-const ASSETS_ROOT = config.constants.assetsRoot;
-const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
+const ASSETS_PATH = config.constants.assetsPath;
+const PUBLISH_ROOT = config.constants.publishRoot;
+const WEBPACK_MANIFEST = '../' + PUBLISH_ROOT + '/' + config.constants.webpackManifest;
 
 module.exports = {
     output: {
-        publicPath: ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/',
+        publicPath: ASSETS_DOMAIN + ASSETS_PATH,
         filename: '[name]-[chunkhash].js'
     },
     plugins: [
@@ -35,10 +36,10 @@ module.exports = {
                     if (value instanceof Array) {
                         for (var i in value) {
                             var item = value[i];
-                            manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = publicPath + item;
+                            manifest[ASSETS_PATH + key + '.' + getFileExtension(item)] = publicPath + item;
                         }
                     } else {
-                        manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(value)] = publicPath + value;
+                        manifest[ASSETS_PATH + key + '.' + getFileExtension(value)] = publicPath + value;
                     }
                 }
                 fs.writeFileSync(

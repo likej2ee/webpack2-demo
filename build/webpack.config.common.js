@@ -4,9 +4,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = require('../config');
 
 const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
-const ASSETS_ROOT = config.constants.assetsRoot;
-const PUBLIC_PATH = '/' + ASSETS_ROOT + '/';
-const LIB_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.libManifest;
+const PUBLISH_ROOT = config.constants.publishRoot;
+const ASSETS_PATH = config.constants.assetsPath;
+const LIB_MANIFEST = '../' + PUBLISH_ROOT + '/' + config.constants.libManifest;
 const INCLUDE_PATHS = path.resolve(__dirname, './' + SOURCE_CODE_ROOT + '/core');
 
 module.exports = {
@@ -133,8 +133,8 @@ module.exports = {
         'demo/demo': 'views/demo/demo.js'
     },
     output: {
-        path: path.join(__dirname, '../' + ASSETS_ROOT),
-        publicPath: PUBLIC_PATH,
+        path: path.join(__dirname, '../' + PUBLISH_ROOT),
+        publicPath: ASSETS_PATH,
         filename: '[name].js'
     },
     plugins: [

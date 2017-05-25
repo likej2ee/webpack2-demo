@@ -6,14 +6,16 @@ var WebpackMd5Hash = require('webpack-md5-hash');
 var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
-const ASSETS_ROOT = config.constants.assetsRoot;
-const WEBPACK_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
-const LIB_MANIFEST_DATA = require('../' + ASSETS_ROOT + '/' + config.constants.libManifest);
+const ASSETS_PATH = config.constants.assetsPath;
+const PUBLISH_ROOT = config.constants.publishRoot;
+const WEBPACK_MANIFEST = '../' + PUBLISH_ROOT + '/' + config.constants.webpackManifest;
+const LIB_MANIFEST_DATA = require('../' + PUBLISH_ROOT + '/' + config.constants.libManifest);
+// DllPlugin 生成的lib文件chunkhash的前4位，解决output文件内容变化(因lib文件名变更)，但是文件名不变化的问题
 const LIB_CHUNKHASH = LIB_MANIFEST_DATA.name.substring(4, 8);
 
 module.exports = {
     output: {
-        publicPath: ASSETS_DOMAIN + '/' + ASSETS_ROOT + '/',
+        publicPath: ASSETS_DOMAIN + ASSETS_PATH,
         filename: '[name]-[chunkhash]' + LIB_CHUNKHASH + '.js',
         chunkFilename: '[chunkhash].[id].chunk.js'
     },
@@ -55,10 +57,10 @@ module.exports = {
                     if (value instanceof Array) {
                         for (var i in value) {
                             var item = value[i];
-                            manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(item)] = publicPath + item;
+                            manifest[ASSETS_PATH + key + '.' + getFileExtension(item)] = publicPath + item;
                         }
                     } else {
-                        manifest['/' + ASSETS_ROOT + '/' + key + '.' + getFileExtension(value)] = publicPath + value;
+                        manifest[ASSETS_PATH + key + '.' + getFileExtension(value)] = publicPath + value;
                     }
                 }
 

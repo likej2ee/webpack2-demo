@@ -9,12 +9,13 @@ var minimist = require('minimist');
 var config = require('./config');
 
 const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
-const ASSETS_ROOT = config.constants.assetsRoot;
-const WEBPACK_MANIFEST = './' + ASSETS_ROOT + '/' + config.constants.webpackManifest;
+const ASSETS_PATH = config.constants.assetsPath;
+const PUBLISH_ROOT = config.constants.publishRoot;
+const WEBPACK_MANIFEST = './' + PUBLISH_ROOT + '/' + config.constants.webpackManifest;
 
-const DEPLOY_DIRECTORY = './www/';
-const BUILD_ASSETS_DIRECTORY = ['./' + ASSETS_ROOT + '/', DEPLOY_DIRECTORY];
-const BUILD_ASSETS_FILES = ['./' + ASSETS_ROOT + '/**/*.*'];
+const DEPLOY_DIRECTORY = './www/'; // 演示多页应用最终发布的静态资源(包含html)
+const BUILD_ASSETS_DIRECTORY = ['./' + PUBLISH_ROOT + '/', DEPLOY_DIRECTORY];
+const BUILD_ASSETS_FILES = ['./' + PUBLISH_ROOT + '/**/*.*'];
 const HTML_FILES = ['./' + SOURCE_CODE_ROOT + '/**/*.html', '!./' + SOURCE_CODE_ROOT + '/lib/**/*'];
 
 // 错误处理函数
@@ -44,11 +45,12 @@ gulp.task('webserver', function() {
             filter: function(fileName, callback) { // 路径区分mac和window
                 callback(!/\.svn/.test(fileName) &&
                     (/\.html$/.test(fileName) ||
-                        new RegExp('/' + ASSETS_ROOT + '/').test(fileName) || // mac目录分隔符 '/'
-                        new RegExp('\\\\' + ASSETS_ROOT + '\\\\').test(fileName))); // win目录分隔符 '\'
+                        new RegExp('/' + PUBLISH_ROOT + '/').test(fileName) || // mac目录分隔符 '/'
+                        new RegExp('\\\\' + PUBLISH_ROOT + '\\\\').test(fileName))); // win目录分隔符 '\'
             }
         },
         defaultFile: './' + SOURCE_CODE_ROOT + '/views/demo/demo.html',
+        fallback: './' + SOURCE_CODE_ROOT + '/views/demo/demo.html',
         // directoryListing: true,
         open: true,
         port: 8899
@@ -135,7 +137,7 @@ gulp.task('webpack-build-dll-production', function(callback) {
     // 获取参数，制定测试环境资源发布地址
     var options = minimist(process.argv.slice(2));
     if (options.deploy === 'test') {
-        merageConfig.output.publicPath = config.test.assetsDomain + '/' + ASSETS_ROOT + '/';
+        merageConfig.output.publicPath = config.test.assetsDomain + ASSETS_PATH;
     }
     webpack(merageConfig).run(function(err, stats) {
         if (err) {
@@ -157,7 +159,7 @@ gulp.task('webpack-build-production', ['webpack-build-dll-production'], function
     // 获取参数，指定测试环境资源发布地址
     var options = minimist(process.argv.slice(2));
     if (options.deploy === 'test') {
-        webpackConfigProduction.output.publicPath = config.test.assetsDomain + '/' + ASSETS_ROOT + '/';
+        webpackConfigProduction.output.publicPath = config.test.assetsDomain + ASSETS_PATH;
         webpackConfigProduction.plugins.shift();
         webpackConfigProduction.plugins.unshift(new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
@@ -195,8 +197,8 @@ gulp.task('release-html', function() {
 
 // 发布资源
 gulp.task('release-assets', function() {
-    return gulp.src(['./' + ASSETS_ROOT + '/**/*'])
-        .pipe(gulp.dest(DEPLOY_DIRECTORY + '/' + ASSETS_ROOT + '/'));
+    return gulp.src(['./' + PUBLISH_ROOT + '/**/*'])
+        .pipe(gulp.dest(DEPLOY_DIRECTORY + '/' + PUBLISH_ROOT + '/'));
 });
 
 /* >>>>>>>>>>>>>>>>>>>>>>>> 发布资源 end <<<<<<<<<<<<<<<<<<<<<<<<<< */

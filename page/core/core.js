@@ -14,8 +14,9 @@ import Vue from 'vue';
 // import VueRouter from 'vue-router';
 
 // 暴露全局定义
+// Vue.use(VueRouter)
 window.Vue = Vue;
-// window.VVueRouterue = VueRouter;
+// window.VueRouter = VueRouter;
 
 if (__PRODUCTION__) {
     console.log('production');

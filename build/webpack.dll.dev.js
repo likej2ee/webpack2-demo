@@ -3,8 +3,8 @@ var webpack = require('webpack');
 var config = require('../config');
 
 const SOURCE_CODE_ROOT = config.constants.sourceCodeRoot;
-const ASSETS_ROOT = config.constants.assetsRoot;
-const LIB_MANIFEST = '../' + ASSETS_ROOT + '/' + config.constants.libManifest;
+const PUBLISH_ROOT = config.constants.publishRoot;
+const LIB_MANIFEST = '../' + PUBLISH_ROOT + '/' + config.constants.libManifest;
 
 module.exports = {
     resolve: {
@@ -23,7 +23,7 @@ module.exports = {
         ]
     },
     output: {
-        path: path.resolve(__dirname, '../' + ASSETS_ROOT),
+        path: path.resolve(__dirname, '../' + PUBLISH_ROOT),
         filename: '[name].js',
         publicPath: '/assets/',
         library: '[name]_[chunkhash]'
