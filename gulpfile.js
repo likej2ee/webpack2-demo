@@ -17,6 +17,7 @@ const DEPLOY_DIRECTORY = './www/'; // 演示多页应用最终发布的静态资
 const BUILD_ASSETS_DIRECTORY = ['./' + PUBLISH_ROOT + '/', DEPLOY_DIRECTORY];
 const BUILD_ASSETS_FILES = ['./' + PUBLISH_ROOT + '/**/*.*'];
 const HTML_FILES = ['./' + SOURCE_CODE_ROOT + '/**/*.html', '!./' + SOURCE_CODE_ROOT + '/lib/**/*'];
+const LIB_FILES = ['./src/core/**/*.scss'] // 库文件
 
 // 错误处理函数
 function errorHandler(src, e) {
@@ -125,6 +126,10 @@ gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
     });
 });
 
+// gulp监听lib
+gulp.task('gulp-watch-lib', function() {
+    return gulp.watch(LIB_FILES, ['webpack-build-dev'])
+})
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>> production begin <<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
@@ -201,8 +206,23 @@ gulp.task('release-assets', function() {
         .pipe(gulp.dest(DEPLOY_DIRECTORY + '/' + PUBLISH_ROOT + '/'));
 });
 
+// // 生成check.html文件，用于健康检查监测服务器是否存活中
+// gulp.task('create-check', function() {
+//     var path = require('path');
+//     require('fs').writeFileSync(
+//         path.join(__dirname, './' + PUBLISH_ROOT + '/check.html'), new Date().toString());
+// });
+
 /* >>>>>>>>>>>>>>>>>>>>>>>> 发布资源 end <<<<<<<<<<<<<<<<<<<<<<<<<< */
 
+// 安装脚本框架
+gulp.task('install', function() {
+    var bower = require('bower');
+    return bower.commands.install()
+        .on('log', function(data) {
+            gutil.log('install-bower', gutil.colors.cyan(data.id), data.message);
+        });
+});
 
 // 发布文件 gulp release --deploy dev/test/production
 gulp.task('release', function(callback) {
@@ -223,18 +243,12 @@ gulp.task('release', function(callback) {
 // * webserver
 // * Finally call the callback function
 gulp.task('dev', function(callback) {
-    runSequence('clean',
-        'webpack-watch',
+    runSequence('clean', ['webpack-watch', 'gulp-watch-lib'],
         'webserver',
         callback);
 });
 
-gulp.task('production', function(callback) {
-    runSequence('clean',
-        'webpack-build-production',
-        'release-html',
-        callback);
+// gulp 默认任务，不启动监听任务
+gulp.task('default', function(callback) {
+    runSequence('clean', 'webpack-build-dev', callback);
 });
-
-// gulp 默认任务
-gulp.task('default', ['dev']);
