@@ -1,6 +1,7 @@
 var path = require('path');
 var fs = require("fs");
 var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
@@ -14,6 +15,9 @@ module.exports = {
         filename: '[name]-[chunkhash].js'
     },
     plugins: [
+        new ExtractTextPlugin({
+            filename: '[name]-[contenthash:20].css'
+        }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')
         }),

@@ -17,7 +17,7 @@ const DEPLOY_DIRECTORY = './www/'; // 演示多页应用最终发布的静态资
 const BUILD_ASSETS_DIRECTORY = ['./' + PUBLISH_ROOT + '/', DEPLOY_DIRECTORY];
 const BUILD_ASSETS_FILES = ['./' + PUBLISH_ROOT + '/**/*.*'];
 const HTML_FILES = ['./' + SOURCE_CODE_ROOT + '/**/*.html', '!./' + SOURCE_CODE_ROOT + '/lib/**/*'];
-const LIB_FILES = ['./src/core/**/*.scss'] // 库文件
+// const LIB_FILES = ['./src/core/**/*.scss'] // 库文件，若使用了ui库，需额外设置ui库的热部署
 
 // 错误处理函数
 function errorHandler(src, e) {
@@ -127,9 +127,9 @@ gulp.task('webpack-build-dev', ['webpack-build-dll-dev'], function(callback) {
 });
 
 // gulp监听lib
-gulp.task('gulp-watch-lib', function() {
-    return gulp.watch(LIB_FILES, ['webpack-build-dev'])
-})
+// gulp.task('gulp-watch-lib', function() {
+//     return gulp.watch(LIB_FILES, ['webpack-build-dev'])
+// })
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>> production begin <<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
@@ -243,7 +243,7 @@ gulp.task('release', function(callback) {
 // * webserver
 // * Finally call the callback function
 gulp.task('dev', function(callback) {
-    runSequence('clean', ['webpack-watch', 'gulp-watch-lib'],
+    runSequence('clean', ['webpack-watch'],
         'webserver',
         callback);
 });
