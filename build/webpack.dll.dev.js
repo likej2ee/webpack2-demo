@@ -28,6 +28,15 @@ module.exports = {
                 fallback: 'style-loader' // use style-loader extract cs's file
             })
         }, {
+            test: /(\.png)|(\.jpg)|(\.jpeg)|(\.gif)$/,
+            use: {
+                loader: 'url-loader',
+                options: {
+                    limit: 1000,
+                    name: 'staticimg/[name].[hash:7].[ext]'
+                }
+            }
+        }, {
             test: /(\.ttf)|(\.eot)|(\.svg)|(\.woff)$/,
             use: {
                 loader: 'file-loader',
@@ -35,7 +44,7 @@ module.exports = {
                     name: 'static/fonts/[name].[hash:7].[ext]'
                 }
             }
-        }],
+        }]
     },
     resolve: {
         extensions: ['.js'],

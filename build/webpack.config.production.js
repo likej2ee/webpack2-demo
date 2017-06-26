@@ -2,7 +2,8 @@ var path = require('path');
 var fs = require("fs");
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var WebpackMd5Hash = require('webpack-md5-hash');
+// var WebpackMd5Hash = require('webpack-md5-hash'); // 不能识别webpack后添加的code变动，导致文件内容变化但是文件的hash值未变化
+var HashOutput = require('webpack-plugin-hash-output');
 var config = require('../config');
 
 const ASSETS_DOMAIN = config.production.assetsDomain;
@@ -17,7 +18,7 @@ module.exports = {
     output: {
         publicPath: ASSETS_DOMAIN + ASSETS_PATH,
         filename: '[name]-[chunkhash]' + LIB_CHUNKHASH + '.js',
-        chunkFilename: '[chunkhash].[id].chunk.js'
+        chunkFilename: '[name]-[chunkhash].js'
     },
     plugins: [
         // 生成hash文件
@@ -27,10 +28,10 @@ module.exports = {
             __TEST__: false,
             __PRODUCTION__: true
         }),
-        new WebpackMd5Hash(),
+        new HashOutput(),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
-            filename: 'common-[hash]' + LIB_CHUNKHASH + '.js',
+            filename: 'common-[chunkhash]' + LIB_CHUNKHASH + '.js',
             minChunks: Number.MAX_VALUE,
         }),
         new ExtractTextPlugin({
