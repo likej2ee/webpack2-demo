@@ -25,12 +25,7 @@ module.exports = {
             }
         }, {
             include: /^(?=.*views)|(?=.*ucenter)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['es2015']
-                }
-            }
+            use: { loader: 'babel-loader' }
         }, {
             test: /\.css$/,
             use: [

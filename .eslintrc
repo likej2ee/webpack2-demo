@@ -1,6 +1,6 @@
 {
     "_comment": "See http://eslint.cn/docs/rules/ for more details",
-    "extends": "eslint:recommended", # 启用eslint推荐配置
+    "extends": "eslint:recommended",
     "env": {
         "browser": true,
         "es6": true,
@@ -20,38 +20,37 @@
         "AGL": true,
         "wx": true
     },
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaVersion": 6,
         "sourceType": "module"
     },
     "rules": {
-        # Possible Errors
         "no-cond-assign": [2, "always"],
         "no-console": 0,
 
-        # Stylistic Issues
-        # "camelcase": 2, 强制使用骆驼拼写法命名约定
-        # "comma-dangle": [2, "never"],     要求或禁止末尾逗号
-        # "curly": 2,   要求遵循大括号约定
-        "brace-style": [2, "1tbs"],
-        # "indent": [2, 4, {    强制使用一致的缩进
-        #     "SwitchCase": 1,
-        #     "MemberExpression": 1
-        # }],
+        "semi": [0, "always"],
+        "camelcase": 0,
+        "comma-dangle": [0, "never"],
+        "curly": 0,
+        "brace-style": [0, "1tbs"],
+        "indent": [0, 4, {
+            "SwitchCase": 1,
+            "MemberExpression": 1
+        }],
         "keyword-spacing": [2, {
             "before": true,
             "after": true
         }],
-        # "linebreak-style": [2, "unix"], 强制使用一致的换行符风格
+        "linebreak-style": [2, "unix"],
         "quotes": [2, "single"],
-        # "semi": [2, "always"],
         "no-unexpected-multiline": [2],
         "space-infix-ops": [2, {
             "int32Hint": false
         }],
         "object-curly-newline": [2, {
-            "minProperties": 1
+            "multiline": true
         }],
-        "object-property-newline": 2,
+        "object-property-newline": 2
     }
 }
