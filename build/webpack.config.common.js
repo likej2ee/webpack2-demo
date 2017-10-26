@@ -25,7 +25,9 @@ module.exports = {
             }
         }, {
             include: /^(?=.*views)|(?=.*ucenter)/,
-            use: { loader: 'babel-loader' }
+            use: {
+                loader: 'babel-loader'
+            }
         }, {
             test: /\.css$/,
             use: [
