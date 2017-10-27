@@ -137,7 +137,7 @@ class ProductSpec {
         return result
     }
 
-    // 根据规则值no字段排序
+    // 根据规则键名称顺序排序
     getSortSpecValue(selectedSpecMap) {
         let result = []
         for (const k in selectedSpecMap) {
