@@ -2,8 +2,9 @@
     "_comment": "See http://eslint.cn/docs/rules/ for more details",
     "extends": "eslint:recommended",
     "env": {
-        "browser": true,
         "es6": true,
+        "node": true,
+        "browser": true,
         "amd": true
     },
     "globals": {
