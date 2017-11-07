@@ -15,7 +15,6 @@ const WEBPACK_MANIFEST = './' + PUBLISH_ROOT + '/' + config.constants.webpackMan
 
 const DEPLOY_DIRECTORY = './www/'; // 演示多页应用最终发布的静态资源(包含html)
 const BUILD_ASSETS_DIRECTORY = ['./' + PUBLISH_ROOT + '/', DEPLOY_DIRECTORY];
-const BUILD_ASSETS_FILES = ['./' + PUBLISH_ROOT + '/**/*.*'];
 const HTML_FILES = ['./' + SOURCE_CODE_ROOT + '/**/*.html', '!./' + SOURCE_CODE_ROOT + '/lib/**/*'];
 // const LIB_FILES = ['./src/core/**/*.scss'] // 库文件，若使用了ui库，需额外设置ui库的热部署
 
