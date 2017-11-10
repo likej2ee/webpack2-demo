@@ -138,6 +138,7 @@ module.exports = {
         new webpack.DllReferencePlugin({
             context: path.resolve(__dirname, '../' + SOURCE_CODE_ROOT),
             manifest: require(path.resolve(__dirname, LIB_MANIFEST)),
-        })
+        }),
+        new webpack.optimize.ModuleConcatenationPlugin()
     ]
 };

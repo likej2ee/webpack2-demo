@@ -49,6 +49,7 @@ module.exports = {
     resolve: {
         extensions: ['.js'],
         modules: [
+            'node_modules',
             path.join(__dirname, '../' + SOURCE_CODE_ROOT)
         ]
     },
@@ -59,7 +60,7 @@ module.exports = {
             'lib/vue/dist/vue',
             'lib/axios/dist/axios.min',
             'lib/url-search-params/build/url-search-params.amd'
-            // 'core/app.scss' 如果使用了比较大的ui库，此处可配置，然后在使用的地方引入lib.css
+            // 'core/app.scss' 如果使用了比较大的ui库， 此处可配置， 然后在使用的地方引入lib.css
         ]
     },
     output: {
@@ -72,6 +73,7 @@ module.exports = {
         new ExtractTextPlugin({
             filename: '[name].css'
         }),
+        new webpack.optimize.ModuleConcatenationPlugin(),
         new webpack.DllPlugin({
             context: path.resolve(__dirname, '../' + SOURCE_CODE_ROOT),
             path: path.resolve(__dirname, LIB_MANIFEST),

@@ -28,16 +28,22 @@ module.exports = {
             __TEST__: false,
             __PRODUCTION__: true
         }),
-        new HashOutput(),
+        new ExtractTextPlugin({
+            filename: '[name]-[contenthash:20].css'
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'common',
             filename: 'common-[chunkhash]' + LIB_CHUNKHASH + '.js',
             minChunks: Number.MAX_VALUE,
         }),
-        new ExtractTextPlugin({
-            filename: '[name]-[contenthash:20].css'
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true,
+            compress: {
+                warnings: false,
+                drop_console: false,
+            }
         }),
-        // 生产压缩优化
+        new HashOutput(),
         function() {
             var publicPath = this.options.output.publicPath;
 
@@ -76,13 +82,6 @@ module.exports = {
                     path.resolve(__dirname, WEBPACK_MANIFEST),
                     JSON.stringify(manifest));
             });
-        },
-        new webpack.optimize.UglifyJsPlugin({
-            minimize: true,
-            compress: {
-                warnings: false,
-                drop_console: false,
-            }
-        }),
+        }
     ]
 };
