@@ -13,8 +13,8 @@ module.exports = {
     module: {
         rules: [{
             enforce: 'pre',
-            test: /\.js$/, // include .js files
-            include: /^(?=.*views)|(?=.*ucenter)|(?=.*core)/,
+            test: /\.ts|\.js$/, // include .js files
+            // exclude: /^(?=.*lib)/,
             use: {
                 loader: 'eslint-loader',
                 options: {
@@ -24,10 +24,15 @@ module.exports = {
                 }
             }
         }, {
-            include: /^(?=.*views)|(?=.*ucenter)/,
+            test: /\.js$/,
+            exclude: /^(?=.*lib)/,
             use: {
                 loader: 'babel-loader'
             }
+        }, {
+            test: /\.tsx?$/,
+            exclude: /^(?=.*lib)/,
+            use: 'ts-loader'
         }, {
             test: /\.css$/,
             use: [
@@ -72,6 +77,7 @@ module.exports = {
             use: 'html-loader'
         }, {
             test: /(\.png)|(\.jpg)|(\.jpeg)|(\.gif)$/,
+            exclude: /^(?=.*lib)/,
             use: {
                 loader: 'url-loader',
                 options: {
@@ -88,10 +94,6 @@ module.exports = {
                     name: 'static/fonts/[name].[hash:7].[ext]'
                 }
             }
-        }, {
-            test: /\.htc$/,
-            include: /^(?=.*lib)/,
-            use: 'file-loader'
         }]
     },
     resolve: { // 解决路径问题，可简化 alias entry 的路径配置
@@ -99,7 +101,7 @@ module.exports = {
             // 'node_modules',
             path.join(__dirname, '../' + SOURCE_CODE_ROOT)
         ],
-        extensions: ['.js'],
+        extensions: ['.tsx', '.ts', '.js'],
         alias: {
             'url-search-params-polyfill$': 'lib/url-search-params/build/url-search-params.amd.js',
             'browser-polyfill$': 'lib/babel-polyfill/browser-polyfill.js',
@@ -124,10 +126,10 @@ module.exports = {
         }
     },
     entry: {
-        'core': 'core/core.js',
-        // 'base': 'views/_base/base.js',
-        // 'index/index': 'views/index/index.js',
-        'demo/demo': 'views/demo/demo.js'
+        'core': 'core/core',
+        // 'base': 'views/_base/base',
+        'demo/demo': 'views/demo/demo',
+        'ts/index': 'views/ts/index'
     },
     output: {
         path: path.join(__dirname, '../' + PUBLISH_ROOT),
