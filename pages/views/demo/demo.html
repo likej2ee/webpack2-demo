@@ -15,23 +15,7 @@
 
 <body>
     <div id="app" class="box">
-        <div class="spec" v-for="spec in specs" v-if="specs">
-            <span class="name">{{spec.displayName}}</span>
-            <span class="value" v-for="specOption in spec.specOptions" v-on:click="chooseSpecOption(spec.displayName, specOption)" v-bind:class="{'disabled': specValueStatus[specOption.specValue].disabled, 'selected': specValueStatus[specOption.specValue].selected }">
-                {{specOption.specValue}}
-            </span>
-        </div>
-        <dl class="spec-selected">
-            <dt>已选择</dt>
-            <dd>{{selectedSpecValueArr}}</dd>
-        </dl>
-        <dl class="spec-unselected">
-            <dt>请选择</dt>
-            <dd>{{unselectedSpecKeyArr}}</dd>
-        </dl>
-        <div>
-            <br> 对应的货品id是 {{selectedCommodityId}}
-        </div>
+        {{message}}
     </div>
     <script src="/assets/demo/demo.js"></script>
 </body>
