@@ -161,7 +161,7 @@ class ProductSpec {
         vm.selectedCommodityId = this.getCommodityId(vm.selectedSpecValueArr)
     }
 
-    // 获取满足规则选项的sku集合
+    // 若选择的规格选项组合无对应的sku，则使用最后一次的选项进行重新选择
     isNeedReelect(specKey, specOption, vm) {
         // 获取符合条件的sku集合
         let skuIds = this.specOptionGroupForAllSKUMap.get(vm.selectedSpecValueArr.toString())
