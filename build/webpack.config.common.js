@@ -128,8 +128,10 @@ module.exports = {
     entry: {
         'core': 'core/core',
         // 'base': 'views/_base/base',
-        'demo/demo': 'views/demo/demo',
-        'ts/index': 'views/ts/index'
+        'index/index': 'views/index/index', // 入口页
+        'demo/demo': 'views/demo/demo', // demo页
+        'ts/index': 'views/ts/index', // typescript联系
+        'archive/product-multi-spec/product-multi-spec': 'views/archive/product-multi-spec/product-multi-spec' // 商品一品多规格
     },
     output: {
         path: path.join(__dirname, '../' + PUBLISH_ROOT),

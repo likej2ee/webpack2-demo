@@ -1,4 +1,4 @@
-import './demo.scss'
+import './product-multi-spec.scss'
 import specsData from './data-specs.js'
 import ProductSpec from './product-spec.js'
 

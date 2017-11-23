@@ -49,8 +49,8 @@ gulp.task('webserver', function() {
                         new RegExp('\\\\' + PUBLISH_ROOT + '\\\\').test(fileName))); // win目录分隔符 '\'
             }
         },
-        defaultFile: './' + SOURCE_CODE_ROOT + '/views/demo/demo.html',
-        fallback: './' + SOURCE_CODE_ROOT + '/views/demo/demo.html',
+        defaultFile: './' + SOURCE_CODE_ROOT + '/views/index/index.html',
+        fallback: './' + SOURCE_CODE_ROOT + '/views/index/index.html',
         // directoryListing: true,
         open: true,
         port: 8899

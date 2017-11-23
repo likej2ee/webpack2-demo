@@ -50,8 +50,8 @@ Preferences/ Settings - User / 中贴入如下配置项
 - 打开命令行窗口，进入项目跟目录(或者先找到项目跟目录，再鼠标右键 + shift按键，在打开的右侧菜单中选择"在此处打开命令行窗口")
 - 运行 npm install 等待安装结束, 安装工程化插件
 - 运行 bower install 等待安装结束，安装项目依赖的脚本框架
-- 运行 gulp，即可自动打开浏览器，若希望以目录形式列出当前已有文件，请更改gulpfile.js中'webserver'任务
-- 运行 gulp production 生成发布版本
+- 运行 gulp dev，即可自动打开浏览器，若希望以目录形式列出当前已有文件，请更改gulpfile.js中'webserver'任务
+- 运行 gulp gulp release --deploy dev/test/production 生成对应环境的构建版本
 
 ## 目录结构
 **其中 src/core 目录,项目初建时规定，不可任意扩展，需团队协商后再更新内容**
