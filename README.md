@@ -35,7 +35,7 @@
     └─lib                           库文件
 ```
 
-## 团队协作必要工具插件(插件配置留个备份)
+## 团队协作必要工具插件(插件配置留个备份)
 
 ### Visual Studio Code
 
@@ -51,7 +51,6 @@
     // 工作台
     "workbench.colorTheme": "Quiet Light",
     "workbench.iconTheme": "vscode-great-icons",
-    "workbench.panel.location": "bottom",
 
     // 文件
     "files.trimTrailingWhitespace": true,
