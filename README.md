@@ -134,7 +134,7 @@
 
 - 为了团队协作，格式化插件必须安装，其中CSScomb安装后，修改下配置项
 
-```json
+```js
     // Set space before `{`.
     "space-before-opening-brace": " ",
     此处默认是"\n"换行，修改成空格" "即可
