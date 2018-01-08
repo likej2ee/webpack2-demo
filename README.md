@@ -39,9 +39,9 @@
 
 ### Visual Studio Code
 
-- 用户设置
+- 用户设置
 
-```json
+```js
 {
     // 编辑器
     "editor.fontSize": 13,
@@ -90,7 +90,7 @@
   - Beautify
   - CSScomb (自定义了格式化规则，使用环境变量方式引用配置文件export CSSCOMB_CONFIG=/Users/xjq/.csscomb.json)
   - Auto Rename Tag
-  - Auto Close Tag
+  - Auto Close Tag
   - Beble ES6/ES7
   - ESLint
   - TSLint
