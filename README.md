@@ -1,48 +1,10 @@
 # 前端页面制作规范
 
-
 ## 项目构建工具
 
-- [node-v7.5.0-x64.msi](https://nodejs.org/dist/v7.5.0/node-v7.5.0-x64.msi) 点击下载Win版node
-- [node-v7.5.0.pkg](https://nodejs.org/dist/v7.5.0/node-v7.5.0.pkg) 点击下载Mac版node
+- [node](https://nodejs.org/en/) 点击下载node
 - [gulp](https://github.com/gulpjs/gulp) 构建工具介绍
 - [sass](http://www.w3cplus.com/sassguide/syntax.html) sass入门语法
-
-## 团队协作必要工具插件
-- 编辑器 sublime(可选择其他编辑器，但为了团队协作请自行查阅设置)
-Preferences/ Settings - User / 中贴入如下配置项
-```
-{
-	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
-	"ensure_newline_at_eof_on_save": true,
-	"font_size": 12,
-	"ignored_packages":
-	[
-		"node_modules"
-	],
-	"show_encoding": true,
-	"tab_size": 4,
-	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true
-}
-```
-- 编辑器插件
-    - CSScomb
-    - JsFormat
-    - HTML/CSS/JS Prettify
-    - Pretty JSON
-    - DocBlockr
-    - Emmet
-    - CSS3
-    - Bracket Highlighter
-    - SublimeLinter
-
-    为了团队协作，格式化插件必须安装，其中CSScomb安装后，修改下配置项
-    ```
-        // Set space before `{`.
-        "space-before-opening-brace": " ",
-        此处默认是"\n"换行，修改成空格" "即可
-    ```
 
 ## 运行项目
 
@@ -51,11 +13,13 @@ Preferences/ Settings - User / 中贴入如下配置项
 - 运行 npm install 等待安装结束, 安装工程化插件
 - 运行 bower install 等待安装结束，安装项目依赖的脚本框架
 - 运行 gulp dev，即可自动打开浏览器，若希望以目录形式列出当前已有文件，请更改gulpfile.js中'webserver'任务
-- 运行 gulp gulp release --deploy dev/test/production 生成对应环境的构建版本
+- 运行 gulp release --deploy dev/test/production 生成对应环境的构建版本
 
 ## 目录结构
-**其中 src/core 目录,项目初建时规定，不可任意扩展，需团队协商后再更新内容**
-```
+
+- 其中 src/core 目录,项目初建时规定，不可任意扩展，需团队协商后再更新内容
+
+``` js
 │  .bowerrc                          bower管理工具的配置文件，配置下载目录、代理等
 │  .npmrc                            npm管理工具的配置文件，可配置代理等
 │  bower.json                        bower管理的库文件资源列表
@@ -69,4 +33,109 @@ Preferences/ Settings - User / 中贴入如下配置项
 │
 └─src
     └─lib                           库文件
+```
+
+## 团队协作必要工具插件(插件配置留个备份)
+
+### Visual Studio Code
+
+- 用户设置
+
+```json
+{
+    // 编辑器
+    "editor.fontSize": 13,
+    "editor.minimap.enabled": false,
+    "editor.formatOnSave": true,
+
+    // 工作台
+    "workbench.colorTheme": "Quiet Light",
+    "workbench.iconTheme": "vscode-great-icons",
+    "workbench.panel.location": "bottom",
+
+    // 文件
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.autoSave": "off",
+
+    // beautify config
+    "beautify.config": {
+        "space_after_anon_function": false,
+        "end_with_newline": true,
+        "brace_style": "collapse,preserve-inline"
+    },
+    "beautify.language": {
+        "css": []
+    },
+
+    // 保存时编译css
+    "csscomb.formatOnSave": true,
+
+    "[markdown]": {
+        "editor.wordWrap": "on",
+        "editor.quickSuggestions": true
+    },
+    "markdownlint.config": {
+        "MD033": {
+            "allowed_elements": ["a"]
+        },
+        "MD029": {
+            "style": "ordered"
+        }
+    }
+}
+```
+
+- 编辑器插件
+  - Beautify
+  - CSScomb (自定义了格式化规则，使用环境变量方式引用配置文件export CSSCOMB_CONFIG=/Users/xjq/.csscomb.json)
+  - Auto Rename Tag
+  - Auto Close Tag
+  - Beble ES6/ES7
+  - ESLint
+  - TSLint
+  - markdownlint
+  - VSCode Great Icons
+  - Complete JSDoc Tags
+  - JavaScript(ES6) code snippets
+
+### sublime
+
+- Preferences/ Settings - User / 中贴入如下配置项
+
+```json
+
+{
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true,
+    "trim_trailing_white_space_on_save": true,
+    "ensure_newline_at_eof_on_save": true,
+    "font_size": 12,
+    "color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
+    "show_encoding": true,
+    "ignored_packages":
+    [
+        "node_modules"
+    ]
+}
+
+```
+
+- 编辑器插件
+  - CSScomb
+  - JsFormat
+  - HTML/CSS/JS Prettify
+  - Pretty JSON
+  - DocBlockr
+  - Emmet
+  - CSS3
+  - Bracket Highlighter
+  - SublimeLinter
+
+- 为了团队协作，格式化插件必须安装，其中CSScomb安装后，修改下配置项
+
+```json
+    // Set space before `{`.
+    "space-before-opening-brace": " ",
+    此处默认是"\n"换行，修改成空格" "即可
 ```
