@@ -87,7 +87,7 @@
 
 - 编辑器插件
   - Beautify
-  - CSScomb (自定义了格式化规则，使用环境变量方式引用配置文件export CSSCOMB_CONFIG=/Users/xjq/.csscomb.json)
+  - CSScomb (export CSSCOMB_CONFIG=/Users/xjq/.csscomb.json)
   - Auto Rename Tag
   - Auto Close Tag
   - Beble ES6/ES7
