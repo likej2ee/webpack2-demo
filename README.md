@@ -44,7 +44,6 @@
 
 ```js
 {
-  {
     // 常用设置
     "editor.tabSize": 2,
     "editor.fontSize": 13,
@@ -89,7 +88,6 @@
     },
     "git.autofetch": true,
     "element-helper.version": "2.2"
-  }
 }
 ```
 
