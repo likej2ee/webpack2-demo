@@ -60,15 +60,21 @@
     "files.trimTrailingWhitespace": true,
     "files.insertFinalNewline": true,
     "files.autoSave": "off",
-    // beautify config
-    "beautify.config": {
-        "indent_size": 2,
-        "space_after_anon_function": false,
-        "end_with_newline": true,
-        "brace_style": "collapse,preserve-inline"
+    "files.associations": {
+        "*.wxml": "wxml"
     },
+    // prettier - code formatter
+    "prettier.printWidth": 120,
+    "prettier.singleQuote": true,
+    "prettier.semi": false,
+    // beautify
     "beautify.language": {
-        "css": []
+        "js": [],
+        "css": [],
+        "html": [
+            "htm",
+            "html"
+        ]
     },
     // csscomb
     "csscomb.ignoreFilesOnSave": [
@@ -82,18 +88,24 @@
         "editor.quickSuggestions": true
     },
     "markdownlint.config": {
+        "MD033": {
+            "allowed_elements": [
+                "a"
+            ]
+        },
         "MD029": {
             "style": "ordered"
         }
     },
     "git.autofetch": true,
-    "element-helper.version": "2.2"
+    "element-helper.version": "2.3",
 }
 ```
 
 - 编辑器插件
   - VSCode Great Icons
   
+  - Prettier - Code formatter
   - Beautify
   - CSScomb ("csscomb.preset": "~/.csscomb.json")
   
@@ -103,7 +115,14 @@
   - EditorConfig for VS Code
   - markdownlint
   
+  - Sass
+  - Vetur
+  - vscode wxml
+  - vscode-element-helper
+  
+  - Vue 2 Snippets
   - JavaScript(ES6) code snippets
+  
   - Complete JSDoc Tags
   - Auto Rename Tag
   - Auto Close Tag
