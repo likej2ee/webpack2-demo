@@ -1,4 +1,11 @@
-# 前端页面制作规范
+# 项目说明
+
+- 早期调研webpack2时上传的项目，跟随webpack1.x在关注使用，是搭配gulp用的，后来webpack4.x被广泛应用才脱离了gulp
+- 里面包含了一些当时比较实用的插件和当时设计开发的商品一品多款demo
+
+- 项目中bower install下载很不稳定，babel版本也低，梳理了下项目内容发现之前写的一品多款demo还会让我有继续深耕前端的信心，所以稍加改动让项目可以在node v8版本下运行，当然，这个项目不能运行，demo也可以放到vue3里稍加修改运行的，这算是轻微coder强迫症犯了，跑不起来不是我风格啊。
+
+- 之所以翻看这个项目，是因为前几天面试被问到关于webpack的基础问题(区分生产环境的配置项是什么)，我当时真的紧张的大脑跟宕机一样，只记得如何实践的，配置项一点都想不起来，你能想象我把工作中最常用的set和map答反了...
 
 ## 项目构建工具
 
@@ -15,6 +22,10 @@
 - 运行 bower install 等待安装结束，安装项目依赖的脚本框架
 - 运行 gulp dev，即可自动打开浏览器，若希望以目录形式列出当前已有文件，请更改gulpfile.js中'webserver'任务
 - 运行 gulp release --deploy dev/test/production 生成对应环境的构建版本
+
+```js
+
+```
 
 ## 目录结构
 
@@ -104,25 +115,25 @@
 
 - 编辑器插件
   - VSCode Great Icons
-  
+
   - Prettier - Code formatter
   - Beautify
   - CSScomb ("csscomb.preset": "~/.csscomb.json")
-  
+
   - Beble ES6/ES7
   - ESLint
   - TSLint
   - EditorConfig for VS Code
   - markdownlint
-  
+
   - Sass
   - Vetur
   - vscode wxml
   - vscode-element-helper
-  
+
   - Vue 2 Snippets
   - JavaScript(ES6) code snippets
-  
+
   - Complete JSDoc Tags
   - Auto Rename Tag
   - Auto Close Tag

@@ -2,9 +2,9 @@
 import './core.scss';
 
 // 处理全局对象兼容性
-import 'browser-polyfill';
-import URLSearchParams from 'url-search-params-polyfill';
-window.URLSearchParams = URLSearchParams;
+// import 'browser-polyfill';
+// import URLSearchParams from 'url-search-params-polyfill';
+// window.URLSearchParams = URLSearchParams;
 
 // 引入公共脚本
 import './app-config.js'; // 项目配置参数
